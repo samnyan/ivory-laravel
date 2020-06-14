@@ -22,3 +22,12 @@ php artisan serve
 
 ### API Endpoint
 All API Endpoint start with `/api`
+
+### IDE Helper
+`php artisan ide-helper:generate` to generate Laravel Class Definition
+
+`php artisan ide-helper:models` to generate Model Definition
+
+Model definition need to run after Database Migration.
+
+Notice: Don't overwrite model files, write definition to `_ide_helper_models.php`

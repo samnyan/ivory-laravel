@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SysInfo extends Model
+class Patient extends Model
 {
-    protected $table = 'sysinfo';
+    protected $table = 'patikkents';
 
     protected $primaryKey = 'id';
     public $timestamps = false;
