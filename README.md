@@ -20,8 +20,12 @@ Before running for the first time, run `php artisan key:generate` to generate th
 php artisan serve
 ```
 
-### API Endpoint
+### API Document
 All API Endpoint start with `/api`
+
+Read generated document [here](public/docs/index.html)
+
+`php artisan apidoc:generate` for updating the api document.
 
 ### IDE Helper
 `php artisan ide-helper:generate` to generate Laravel Class Definition

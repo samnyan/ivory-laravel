@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group Authentication
+ * APIs for authentication
+ * @package App\Http\Controllers
+ */
 class AuthController extends Controller
 {
     /**
@@ -18,7 +23,19 @@ class AuthController extends Controller
     }
 
     /**
+     * Login
+     *
      * Get a JWT via given credentials.
+     * @bodyParam username string required The username of the user. Example: demo
+     * @bodyParam password string required The password of the user. Example: 12345678
+     * @response {
+     *  "access_token": "",
+     *  "token_type": "bearer",
+     *  "expires_in": 3600
+     * }
+     * @response 401 {
+     *  "message": "登录验证失败"
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -27,14 +44,25 @@ class AuthController extends Controller
         $credentials = request(['username', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => '登录验证失败'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
     /**
+     * Register
+     *
      * Register user from api request
+     * @bodyParam username string required The username of the user. Example: demo
+     * @bodyParam password string required The password of the user. Example: 12345678
+     * @bodyParam email string required The email of the user. Example: me@example.com
+     * @bodyParam sex integer required The sex of the user. Example: [0, 1, 2]
+     * @bodyParam age integer required The age of the user. Example: 24
+     * @response {
+     *  "message": "注册成功"
+     * }
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -60,8 +88,31 @@ class AuthController extends Controller
     }
 
     /**
+     * Me
+     * @authenticatied
      * Get the authenticated User.
      *
+     * @response {
+     * "id": 2,
+     * "created_at": null,
+     * "updated_at": null,
+     * "type": 0,
+     * "username": "example",
+     * "sex": 0,
+     * "age": 0,
+     * "head_portrait": null,
+     * "clinic": null,
+     * "mobile": null,
+     * "email": "me@example.com",
+     * "fixphonenumber": null,
+     * "certificat": null,
+     * "certificat_checked": null,
+     * "wechat": null,
+     * "intro": null,
+     * "school": null,
+     * "major": null
+     * }
+     * @apiResourceModel \App\User
      * @return \Illuminate\Http\JsonResponse
      */
     public function me()
@@ -70,7 +121,12 @@ class AuthController extends Controller
     }
 
     /**
+     * Logout
+     * @authenticated
      * Log the user out (Invalidate the token).
+     * @response {
+     *  "message": "登出成功"
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -82,7 +138,14 @@ class AuthController extends Controller
     }
 
     /**
+     * Refresh token
+     * @authenticated
      * Refresh a token.
+     * @response {
+     *  "access_token": "",
+     *  "token_type": "bearer",
+     *  "expires_in": 3600
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
