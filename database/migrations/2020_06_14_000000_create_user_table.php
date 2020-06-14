@@ -18,7 +18,7 @@ class CreateUserTable extends Migration
             $table->collation = 'latin1_swedish_ci';
             $table->charset = 'latin1';
             $table->integer('id', true);
-            $table->string('pdw', 20)->charset('latin1')->collation('latin1_swedish_ci')->nullable(false)
+            $table->string('pwd', 20)->charset('latin1')->collation('latin1_swedish_ci')->nullable(false)
                 ->comment('不超过20位的密码');
             $table->tinyInteger('type')->default(0)->nullable(false)
                 ->comment('0医生1患者2专家3其他，目前系统只提供医生和专家登录，专家即网站的管理维护人员，可以是矫治器生产者本人');
