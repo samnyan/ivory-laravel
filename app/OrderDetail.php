@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patient extends Model
+class OrderDetail extends Model
 {
-    protected $table = 'patients';
+    protected $table = 'order_detail';
 
     protected $primaryKey = 'id';
-    protected $keyType = 'string';
     public $timestamps = false;
+
 }
