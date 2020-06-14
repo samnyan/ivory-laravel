@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'user';
+    protected $table = 'users';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'pwd',
     ];
 
     /**
@@ -31,12 +31,13 @@ class User extends Authenticatable
         'pwd',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
+
+    public function clinic()
+    {
+        return $this->belongsTo('App\Clinic');
+    }
 }

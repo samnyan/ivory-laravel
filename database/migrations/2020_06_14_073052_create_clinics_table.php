@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSysinfoTable extends Migration
+class CreateClinicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateSysinfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('sysinfo', function (Blueprint $table) {
+        Schema::create('clinics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('type')->nullable(false)->comment('0欢迎词1广告');
-            $table->string('msg')->nullable(false)->comment('消息内容');
+            $table->string('name', 50)->nullable(false);
+            $table->string('city');
+            $table->string('position', 50)->nullable(false)->comment('经纬度坐标，用于按地图搜索');
+            $table->string('intro', 100)->nullable(false);
         });
     }
 
@@ -28,6 +30,6 @@ class CreateSysinfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sysinfo');
+        Schema::dropIfExists('clinics');
     }
 }

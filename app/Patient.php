@@ -10,5 +10,9 @@ class Patient extends Model
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';
-    public $timestamps = false;
+
+    public function patientCases()
+    {
+        return $this->hasMany('App\PatientCase');
+    }
 }
