@@ -16,10 +16,11 @@ class CreateUserTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('username', 20)->nullable(false)->unique();
             $table->string('pwd')->nullable(false)->comment('不超过20位的密码');
+            $table->string('email', 30)->nullable(false)->unique();
             $table->tinyInteger('type')->default(0)->nullable(false)
                 ->comment('0医生1患者2专家3其他，目前系统只提供医生和专家登录，专家即网站的管理维护人员，可以是矫治器生产者本人');
-            $table->string('username', 20)->nullable(false)->unique();
             $table->tinyInteger('sex')->nullable(false)
                 ->comment('0男1女2保密');
             $table->integer('age')->nullable(true)->comment('年龄');
@@ -29,7 +30,6 @@ class CreateUserTable extends Migration
                 ->comment('诊所名称');
             $table->string('mobile', 14)->nullable(true)
                 ->comment('手机号码+86');
-            $table->string('email', 30)->nullable(false)->unique();
             $table->string('fixphonenumber', 15)->nullable(true);
             $table->string('certificat', 50)->nullable(true)
                 ->comment('证书图像的存储路径');
