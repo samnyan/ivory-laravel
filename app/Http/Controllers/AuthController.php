@@ -26,7 +26,7 @@ class AuthController extends Controller
      * Login
      *
      * Get a JWT via given credentials.
-     * @bodyParam username string required The username of the user. Example: demo
+     * @bodyParam email string required The email of the user. Example: me@example.comciw
      * @bodyParam password string required The password of the user. Example: 12345678
      * @response {
      *  "access_token": "",
@@ -41,7 +41,10 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['username', 'password']);
+        $validate = request()->validate([
+            'email' => 'required|email'
+        ]);
+        $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['message' => '登录验证失败'], 401);

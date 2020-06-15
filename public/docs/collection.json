@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "6d83fa5c-368e-42ff-a956-88fbf2f53785",
+        "_postman_id": "c085e404-eb94-4725-8ba8-35decbba28c8",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -33,7 +33,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"username\": \"demo\",\n    \"password\": \"12345678\"\n}"
+                            "raw": "{\n    \"email\": \"me@example.comciw\",\n    \"password\": \"12345678\"\n}"
                         },
                         "description": "Get a JWT via given credentials.",
                         "response": []

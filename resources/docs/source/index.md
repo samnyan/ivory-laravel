@@ -35,7 +35,7 @@ curl -X POST \
     "http://localhost/api/auth/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"username":"demo","password":"12345678"}'
+    -d '{"email":"me@example.comciw","password":"12345678"}'
 
 ```
 
@@ -50,7 +50,7 @@ let headers = {
 };
 
 let body = {
-    "username": "demo",
+    "email": "me@example.comciw",
     "password": "12345678"
 }
 
@@ -87,7 +87,7 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `username` | string |  required  | The username of the user.
+    `email` | string |  required  | The email of the user.
         `password` | string |  required  | The password of the user.
     
 <!-- END_a925a8d22b3615f12fca79456d286859 -->
