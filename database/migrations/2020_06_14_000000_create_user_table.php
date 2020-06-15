@@ -30,10 +30,10 @@ class CreateUserTable extends Migration
                 ->comment('诊所名称');
             $table->string('mobile', 14)->nullable(true)
                 ->comment('手机号码+86');
-            $table->string('fixphonenumber', 15)->nullable(true);
-            $table->string('certificat', 50)->nullable(true)
+            $table->string('fix_phone_number', 15)->nullable(true);
+            $table->string('certificate', 255)->nullable(true)
                 ->comment('证书图像的存储路径');
-            $table->tinyInteger('certificat_checked')->nullable(true)->comment('证书状态：0未上传，1已上传，2已审核通过，3审核不通过');
+            $table->tinyInteger('certificate_checked')->nullable(true)->comment('证书状态：0未上传，1已上传，2已审核通过，3审核不通过');
             $table->string('wechat', 20)->nullable(true)->unique()
                 ->comment('微信号，值为空表示未绑定');
             $table->string('intro', 200)->nullable(true)

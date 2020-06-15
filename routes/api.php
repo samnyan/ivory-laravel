@@ -32,9 +32,9 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:0'],
     'prefix' => 'doctor'
 ], function () {
-    Route::get('/', function () {
-        return response()->json(['message' => 'Hi']);
-    });
+    Route::get('me', 'DoctorController@me');
+    Route::get('certificate', 'DoctorController@getCertificate');
+    Route::post('certificate/upload', 'DoctorController@uploadCertificate');
 });
 
 // Api endpoint for Professor
