@@ -11,8 +11,22 @@ class Patient extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'string';
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+    ];
+
     public function patientCases()
     {
         return $this->hasMany('App\PatientCase');
+    }
+
+    public function doctor()
+    {
+        return $this->belongsTo('App\User');
     }
 }

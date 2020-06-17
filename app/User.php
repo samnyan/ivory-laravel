@@ -65,6 +65,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo('App\Clinic');
     }
 
+    public function patients()
+    {
+        return $this->hasMany('App\Patient');
+    }
+
     /**
      * Overwrite getAuthPassword function to get password from pwd field
      * @return mixed|string

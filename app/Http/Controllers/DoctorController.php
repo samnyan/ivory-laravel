@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -61,5 +63,77 @@ class DoctorController extends Controller
         return response()->json(['message' => '上传成功', 'path' => $path]);
     }
 
+    public function getClinic()
+    {
+        return auth()->user()->clinic;
+    }
+
+    public function getPatients()
+    {
+        return Patient::whereUserId(auth()->id())->paginate(15);
+    }
+
+    public function createPatient(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'sex' => 'required|between:0,2',
+            'comments' => 'required'
+        ]);
+
+        $patient = new Patient();
+        // Generate patient ID
+        $patient->id = $this->generateRandomChar(3) . strval(date("ymdHis"));
+        $patient->user_id = auth()->user()->id;
+        $patient->name = request()->get('name');
+        $patient->age = request()->get('age');
+        $patient->sex = request()->get('sex');
+        $patient->comments = request()->get('comments');
+        $patient->save();
+
+        return $patient;
+    }
+
+    public function updateClinic()
+    {
+
+    }
+
+    public function getOrders()
+    {
+        return Order::whereUserId(auth()->id())->paginate(15);
+    }
+
+    public function createOrder(Request $request)
+    {
+        $request->validate([
+            'patient_case_id' => 'required',
+            'product_count' => 'required',
+            'address_id' => 'required|exists:addresses,id',
+        ]);
+
+        $user = auth()->user();
+
+        $order = new Order();
+        $order->clinic_id = $user->clinic->id;
+        $order->user_id = $user->id;
+        $order->patient_case_id = $request->get('patient_case_id');
+        $order->is_fist = !Order::whereUserId($user->id)->exists();
+        $order->state = 0;
+        $order->product_count = $request->get('product_count');
+
+    }
+
+    function generateRandomChar($length = 2)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
 }

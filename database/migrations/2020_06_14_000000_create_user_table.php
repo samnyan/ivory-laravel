@@ -26,8 +26,8 @@ class CreateUserTable extends Migration
             $table->integer('age')->nullable(true)->comment('年龄');
             $table->string('head_portrait', 50)->nullable(true)
                 ->comment('头像文件路径');
-            $table->string('clinic', 20)->nullable(true)
-                ->comment('诊所名称');
+            $table->bigInteger('clinic_id')->nullable(true)
+                ->comment('诊所ID');
             $table->string('mobile', 14)->nullable(true)
                 ->comment('手机号码+86');
             $table->string('fix_phone_number', 15)->nullable(true);

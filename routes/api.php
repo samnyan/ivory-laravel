@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Api endpoint for public request without authentication
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'open'
+], function () {
+    Route::get('clinics', 'ClinicController@getClinics');
+    Route::get('clinic', 'ClinicController@getClinic');
+});
 
 // Api endpoint for authentication
 Route::group([
@@ -35,6 +42,11 @@ Route::group([
     Route::get('me', 'DoctorController@me');
     Route::get('certificate', 'DoctorController@getCertificate');
     Route::post('certificate/upload', 'DoctorController@uploadCertificate');
+    Route::get('clinic', 'DoctorController@getClinic');
+    Route::get('patient', 'DoctorController@getPatients');
+    Route::post('patient', 'DoctorController@createPatient');
+    Route::put('patient', 'DoctorController@updatePatient');
+    Route::get('order', 'DoctorController@getOrders');
 });
 
 // Api endpoint for Professor
@@ -47,12 +59,10 @@ Route::group([
     });
 });
 
-// Api endpoint for Professor
+// Api endpoint for Manager
 Route::group([
     'middleware' => ['api', 'auth:api', 'type:3'],
     'prefix' => 'management'
 ], function () {
-    Route::get('/', function () {
-        return response()->json(['message' => 'Hi']);
-    });
+    Route::get('/users', 'ManagementController@getUsers');
 });

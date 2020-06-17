@@ -17,9 +17,9 @@ class CreatePatientsTable extends Migration
             $table->char('id', 15)->nullable(false)
                 ->comment('病历号，系统自动生成，患者终生使用');
             $table->timestamps();
+            $table->bigInteger('user_id')->nullable(false)->comment('创建该患者的用户');
             $table->string('name', 20)->nullable(false)
                 ->comment('患者姓名');
-            $table->dateTime('createtime')->useCurrent()->nullable(false)->comment('创建时间');
             $table->tinyInteger('age')->nullable(false)->comment('年龄');
             $table->tinyInteger('sex')->nullable(false)->comment('0男1女2其他');
             $table->string('comments', 50)->nullable(false)

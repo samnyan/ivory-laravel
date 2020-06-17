@@ -23,7 +23,7 @@ class CreateAddressesTable extends Migration
             $table->integer('province')->nullable(false)->comment('省份');
             $table->integer('city')->nullable(false)->comment('城市');
             $table->integer('area')->nullable(false)->comment('地区');
-            $table->integer('street')->nullable(false)->comment('街道/详细收货地址');
+            $table->string('street')->nullable(false)->comment('街道/详细收货地址');
             $table->integer('zip')->nullable(false)->comment('邮政编码');
             $table->boolean('is_default')->nullable(false)->default(true)->comment('是否默认地址');
         });
