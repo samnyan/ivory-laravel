@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Patient;
 use App\PatientCase;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @group Doctor
@@ -28,20 +26,9 @@ class DoctorController extends Controller
     }
 
     /**
-     * Get My account info
-     * @authenticated
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    /**
      * Get certificate
      * @authenticated
      * Get the uploaded certificate file
-     * @response binary
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function getCertificate()
@@ -94,7 +81,32 @@ class DoctorController extends Controller
     /**
      * Get Patients
      * @authenticated
+     * @queryParam  page The page number to return. Example: 1
      * Get all patients created by this user.
+     * @response {
+     * "current_page": 1,
+     * "data": [
+     * {
+     * "id": "DLE200617083554",
+     * "created_at": null,
+     * "updated_at": null,
+     * "name": "某人",
+     * "age": 10,
+     * "sex": 0,
+     * "comments": "无"
+     * }
+     * ],
+     * "first_page_url": "http://localhost:8000/api/doctor/patient?page=1",
+     * "from": 1,
+     * "last_page": 1,
+     * "last_page_url": "http://localhost:8000/api/doctor/patient?page=1",
+     * "next_page_url": null,
+     * "path": "http://localhost:8000/api/doctor/patient",
+     * "per_page": 15,
+     * "prev_page_url": null,
+     * "to": 1,
+     * "total": 1
+     * }
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getPatients()
@@ -106,16 +118,22 @@ class DoctorController extends Controller
      * Get Patient
      * @authenticated
      * Get patient by id.
-     * @pathParam id required The id of the patient.
-     * @param Request $request
+     * @urlParam id required The ID of the case. Example: DLE200617083554
+     * @response {
+     * "id": "DLE200617083554",
+     * "created_at": null,
+     * "updated_at": null,
+     * "name": "某人",
+     * "age": 10,
+     * "sex": 0,
+     * "comments": "无"
+     * }
+     * @param $id integer
      * @return Patient|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
-    public function getPatient(Request $request)
+    public function getPatient($id)
     {
-        $request->validate([
-            'id' => 'required|numeric'
-        ]);
-        return Patient::whereId($request->get('id'))->whereUserId(auth()->id())->firstOrFail();
+        return Patient::whereId($id)->whereUserId(auth()->id())->firstOrFail();
     }
 
     /**
@@ -168,12 +186,12 @@ class DoctorController extends Controller
      * Get case by id
      * @urlParam id required The ID of the case
      * @param Request $request
+     * @param $id integer of case
      * @return PatientCase|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
-    public function getCase(Request $request)
+    public function getCase(Request $request, $id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        return PatientCase::whereId($request->get('id'))->whereUserId(auth()->id())->firstOrFail();
+        return PatientCase::whereId($id)->whereUserId(auth()->id())->firstOrFail();
     }
 
     /**

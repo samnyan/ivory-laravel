@@ -27,10 +27,8 @@ class ClinicController extends Controller
         return Clinic::paginate($size);
     }
 
-    public function getClinic(Request $request)
+    public function getClinic($id)
     {
-        $request->validate(['id' => 'required']);
-
-        return Clinic::whereId($request->get('id'));
+        return Clinic::whereId($id);
     }
 }

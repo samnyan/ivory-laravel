@@ -39,7 +39,6 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:0'],
     'prefix' => 'doctor'
 ], function () {
-    Route::get('me', 'DoctorController@me');
     Route::get('certificate', 'DoctorController@getCertificate');
     Route::post('certificate/upload', 'DoctorController@uploadCertificate');
     Route::get('clinic', 'DoctorController@getClinic');
@@ -67,5 +66,10 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:3'],
     'prefix' => 'management'
 ], function () {
-    Route::get('/users', 'ManagementController@getUsers');
+    Route::get('/user', 'ManagementController@getUsers');
+    Route::get('/user/{id}', 'ManagementController@getUser');
+    Route::get('/clinic', 'ManagementController@getClinics');
+    Route::get('/clinic/{id}', 'ManagementController@getClinic');
+    Route::get('/order', 'ManagementController@getOrders');
+    Route::get('/order/{id}', 'ManagementController@getOrder');
 });

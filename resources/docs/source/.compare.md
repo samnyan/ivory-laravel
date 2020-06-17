@@ -2,7 +2,6 @@
 title: API Reference
 
 language_tabs:
-- bash
 - javascript
 
 includes:
@@ -29,15 +28,6 @@ APIs for authentication
 Get a JWT via given credentials.
 
 > Example request:
-
-```bash
-curl -X POST \
-    "http://localhost/api/auth/login" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"email":"me@example.comciw","password":"12345678"}'
-
-```
 
 ```javascript
 const url = new URL(
@@ -99,15 +89,6 @@ Register user from api request
 
 > Example request:
 
-```bash
-curl -X POST \
-    "http://localhost/api/auth/register" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"username":"demo","password":"12345678","email":"me@example.com","sex":0,"age":24}'
-
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/auth/register"
@@ -164,26 +145,14 @@ Parameter | Type | Status | Description
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
-```bash
-curl -X POST \
-    "http://localhost/api/auth/logout" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/auth/logout"
 );
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
 
 fetch(url, {
     method: "POST",
-    headers: headers,
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -210,26 +179,14 @@ fetch(url, {
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
-```bash
-curl -X POST \
-    "http://localhost/api/auth/refresh" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/auth/refresh"
 );
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
 
 fetch(url, {
     method: "POST",
-    headers: headers,
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -257,26 +214,14 @@ fetch(url, {
 
 > Example request:
 
-```bash
-curl -X POST \
-    "http://localhost/api/auth/me" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/auth/me"
 );
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
 
 fetch(url, {
     method: "POST",
-    headers: headers,
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -314,92 +259,82 @@ fetch(url, {
 
 <!-- END_a47210337df3b4ba0df697c115ba0c1e -->
 
-#Doctor
+#Clinic
 
-APIs for Doctor
-<!-- START_e26b43e6b4a37753dbd68ec8120ce98b -->
-## Get My account info
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Public APIs for getting clinic info.
+<!-- START_c89fbf1913f819ba6250432756fd3666 -->
+## api/open/clinics
 > Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/api/doctor/me" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/doctor/me"
+    "http://localhost/api/open/clinics"
 );
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
 
 fetch(url, {
     method: "GET",
-    headers: headers,
 })
     .then(response => response.json())
     .then(json => console.log(json));
 ```
 
 
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
 
 ### HTTP Request
-`GET api/doctor/me`
+`GET api/open/clinics`
 
 
-<!-- END_e26b43e6b4a37753dbd68ec8120ce98b -->
+<!-- END_c89fbf1913f819ba6250432756fd3666 -->
 
+<!-- START_49d6a3543680fabc28f79cd1087e1a6d -->
+## api/open/clinic
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/open/clinic"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/open/clinic`
+
+
+<!-- END_49d6a3543680fabc28f79cd1087e1a6d -->
+
+#Doctor
+
+APIs for Doctor
 <!-- START_5e3f194cbdab5f40a96adca0e87b3d7c -->
 ## Get certificate
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
-```bash
-curl -X GET \
-    -G "http://localhost/api/doctor/certificate" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/doctor/certificate"
 );
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
 
 fetch(url, {
     method: "GET",
-    headers: headers,
 })
     .then(response => response.json())
     .then(json => console.log(json));
 ```
 
 
-> Example response (200):
-
-```json
-null
-```
 
 ### HTTP Request
 `GET api/doctor/certificate`
@@ -413,15 +348,6 @@ null
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
-```bash
-curl -X POST \
-    "http://localhost/api/doctor/certificate/upload" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"certificate":"soluta"}'
-
-```
-
 ```javascript
 const url = new URL(
     "http://localhost/api/doctor/certificate/upload"
@@ -433,7 +359,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "soluta"
+    "certificate": "tenetur"
 }
 
 fetch(url, {
@@ -456,5 +382,453 @@ Parameter | Type | Status | Description
     `certificate` | binary |  required  | The file of certificate image.
     
 <!-- END_9c8a0122d4d5be39c35086fa347ddfa1 -->
+
+<!-- START_4b5b3a4e7e45af7dae9e7c5936895f79 -->
+## Get clinic
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/clinic"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "name": "达明口腔门诊部",
+    "city": "广州",
+    "position": "113.595114,23.544983",
+    "intro": "暂无介绍"
+}
+```
+
+### HTTP Request
+`GET api/doctor/clinic`
+
+
+<!-- END_4b5b3a4e7e45af7dae9e7c5936895f79 -->
+
+<!-- START_7140b674bc982c59a90378b528a6f925 -->
+## Get Patients
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patient"
+);
+
+let params = {
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": "DLE200617083554",
+            "created_at": null,
+            "updated_at": null,
+            "name": "某人",
+            "age": 10,
+            "sex": 0,
+            "comments": "无"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/doctor\/patient?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/doctor\/patient?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/doctor\/patient",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
+
+### HTTP Request
+`GET api/doctor/patient`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `page` |  optional  | The page number to return.
+
+<!-- END_7140b674bc982c59a90378b528a6f925 -->
+
+<!-- START_56aad3ae84439bb6bc85780542833e78 -->
+## Get Patient
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patient/DLE200617083554"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": "DLE200617083554",
+    "created_at": null,
+    "updated_at": null,
+    "name": "某人",
+    "age": 10,
+    "sex": 0,
+    "comments": "无"
+}
+```
+
+### HTTP Request
+`GET api/doctor/patient/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the case.
+
+<!-- END_56aad3ae84439bb6bc85780542833e78 -->
+
+<!-- START_23bc824a9562eb9873b6ae7e5d042322 -->
+## Create patient
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patient"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "someone",
+    "age": 24,
+    "sex": 0,
+    "comments": "Some content."
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/doctor/patient`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | The name of the patient.
+        `age` | integer |  required  | The age of the patient.
+        `sex` | integer |  required  | The sex of the patient.
+        `comments` | string |  required  | The comments of the patient.
+    
+<!-- END_23bc824a9562eb9873b6ae7e5d042322 -->
+
+<!-- START_555c845d7e367546dd34081c14d0a491 -->
+## Get cases
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patientCase"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/doctor/patientCase`
+
+
+<!-- END_555c845d7e367546dd34081c14d0a491 -->
+
+<!-- START_4bed066ce46b16ab75eb1801478c9174 -->
+## Get case
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patientCase/natus"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/doctor/patientCase/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the case
+
+<!-- END_4bed066ce46b16ab75eb1801478c9174 -->
+
+<!-- START_ff11b8c6f70c4d81bf372cc58c5ba000 -->
+## Get orders
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order"
+);
+
+let params = {
+    "page": "inventore",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/doctor/order`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `page` |  optional  | Page of the request.
+
+<!-- END_ff11b8c6f70c4d81bf372cc58c5ba000 -->
+
+#Management
+
+APIs for Management
+<!-- START_5a871f557e56944e43c2995b83e7ee9b -->
+## api/management/user
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/user"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/user`
+
+
+<!-- END_5a871f557e56944e43c2995b83e7ee9b -->
+
+<!-- START_5c64d602e9b6db7f5e9ae2ebbd1e794a -->
+## api/management/user/{id}
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/user/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/user/{id}`
+
+
+<!-- END_5c64d602e9b6db7f5e9ae2ebbd1e794a -->
+
+<!-- START_85b26dfb7c0629679f8d09667a72a8b1 -->
+## api/management/clinic
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/clinic"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/clinic`
+
+
+<!-- END_85b26dfb7c0629679f8d09667a72a8b1 -->
+
+<!-- START_a867e88b69e1796806dcd6bc4ad72d81 -->
+## api/management/clinic/{id}
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/clinic/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/clinic/{id}`
+
+
+<!-- END_a867e88b69e1796806dcd6bc4ad72d81 -->
+
+<!-- START_1360ec9f315bee8c1c4899c57a9b9b51 -->
+## api/management/order
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/order"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/order`
+
+
+<!-- END_1360ec9f315bee8c1c4899c57a9b9b51 -->
+
+<!-- START_61c49863786f10cddcc25fb7d05e86d7 -->
+## api/management/order/{id}
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/management/order/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/management/order/{id}`
+
+
+<!-- END_61c49863786f10cddcc25fb7d05e86d7 -->
 
 

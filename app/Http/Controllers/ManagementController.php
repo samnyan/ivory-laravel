@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Clinic;
 use App\Order;
 use App\User;
-use Request;
 
 /**
  * @group Management
@@ -21,10 +20,9 @@ class ManagementController extends Controller
         return User::paginate(15);
     }
 
-    public function getUser(Request $request)
+    public function getUser($id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        return User::whereId($request->get('id'))->firstOrFail();
+        return User::whereId($id)->firstOrFail();
     }
 
     public function getClinics()
@@ -32,10 +30,9 @@ class ManagementController extends Controller
         return Clinic::paginate(15);
     }
 
-    public function getClinic(Request $request)
+    public function getClinic($id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        return Clinic::whereId($request->get('id'))->firstOrFail();
+        return Clinic::whereId($id)->firstOrFail();
     }
 
     public function getOrders()
@@ -43,9 +40,8 @@ class ManagementController extends Controller
         return Order::paginate(15);
     }
 
-    public function getOrder(Request $request)
+    public function getOrder($id)
     {
-        $request->validate(['id' => 'required|numeric']);
-        return Order::whereId($request->get('id'))->firstOrFail();
+        return Order::whereId($id)->firstOrFail();
     }
 }
