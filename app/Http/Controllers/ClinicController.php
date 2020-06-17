@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Clinic;
 use Illuminate\Http\Request;
 
+/**
+ * @group Clinic
+ * Public APIs for getting clinic info.
+ * @package App\Http\Controllers
+ */
 class ClinicController extends Controller
 {
 

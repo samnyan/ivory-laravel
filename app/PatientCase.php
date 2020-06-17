@@ -12,4 +12,9 @@ class PatientCase extends Model
     {
         return $this->belongsTo('App\Patient');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

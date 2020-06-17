@@ -44,8 +44,11 @@ Route::group([
     Route::post('certificate/upload', 'DoctorController@uploadCertificate');
     Route::get('clinic', 'DoctorController@getClinic');
     Route::get('patient', 'DoctorController@getPatients');
+    Route::get('patient/{id}', 'DoctorController@getPatient');
     Route::post('patient', 'DoctorController@createPatient');
     Route::put('patient', 'DoctorController@updatePatient');
+    Route::get('patientCase', 'DoctorController@getCases');
+    Route::get('patientCase/{id}', 'DoctorController@getCase');
     Route::get('order', 'DoctorController@getOrders');
 });
 

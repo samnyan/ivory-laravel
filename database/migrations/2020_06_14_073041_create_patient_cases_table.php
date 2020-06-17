@@ -17,6 +17,7 @@ class CreatePatientCasesTable extends Migration
             $table->id()->comment('方案的ID号，被订单表引用');
             $table->timestamps();
             $table->char('patient_id', 15)->nullable(false)->comment('患者病历号');
+            $table->bigInteger('user_id')->nullable(false)->comment('创建方案的用户名');
             $table->tinyInteger('state')->nullable(false)->comment('0创建1已提交2已审核3已存档4待修改');
             $table->string('features')->comment('患者症状描述');
             $table->json('files')->comment('JSON格式的8张相片2张X版及模型号');
