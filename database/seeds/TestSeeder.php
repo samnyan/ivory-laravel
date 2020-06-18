@@ -45,7 +45,8 @@ class TestSeeder extends Seeder
                 'id' => 1,
                 'name' => '达明口腔门诊部',
                 'city' => '广州',
-                'position' => '113.595114,23.544983',
+                'image' => 'http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg',
+                'position' => '23.544983,113.595114',
                 'intro' => '暂无介绍'
             ]
         ]);

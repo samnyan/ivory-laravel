@@ -29,6 +29,12 @@ class ClinicController extends Controller
 
     public function getClinic($id)
     {
-        return Clinic::whereId($id);
+        $clinic = Clinic::whereId($id);
+        $doctors = [];
+        foreach ($clinic->doctors() as $doctor) {
+            array_push($doctors, ['name', $doctor->username]);
+        }
+        $clinic->doctors = $doctors;
+        return $clinic;
     }
 }
