@@ -18,8 +18,9 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'open'
 ], function () {
-    Route::get('clinics', 'ClinicController@getClinics');
+    Route::get('clinic', 'ClinicController@getClinics');
     Route::get('clinic/{id}', 'ClinicController@getClinic');
+    Route::get('clinic/{id}/doctor', 'ClinicController@getClinicDoctor');
 });
 
 // Api endpoint for authentication

@@ -10,6 +10,6 @@ class Clinic extends Model
 
     public function doctors()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'clinic_id');
     }
 }

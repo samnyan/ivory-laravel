@@ -198,7 +198,7 @@ class DoctorController extends Controller
      * Get orders
      * @authenticated
      * Get all order related to this user
-     * @queryParam page Page of the request.
+     * @queryParam page Page of the request. Example: 1
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getOrders()

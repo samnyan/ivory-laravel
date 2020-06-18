@@ -262,33 +262,10 @@ fetch(url, {
 #Clinic
 
 Public APIs for getting clinic info.
-<!-- START_c89fbf1913f819ba6250432756fd3666 -->
-## api/open/clinics
-> Example request:
-
-```javascript
-const url = new URL(
-    "http://localhost/api/open/clinics"
-);
-
-
-fetch(url, {
-    method: "GET",
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`GET api/open/clinics`
-
-
-<!-- END_c89fbf1913f819ba6250432756fd3666 -->
-
 <!-- START_49d6a3543680fabc28f79cd1087e1a6d -->
-## api/open/clinic
+## Get clinics
+Get clinic list
+
 > Example request:
 
 ```javascript
@@ -305,12 +282,130 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "name": "达明口腔门诊部",
+            "city": "广州",
+            "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+            "position": "23.544983,113.595114",
+            "address": "广州市从化区河东北路5号",
+            "intro": "暂无介绍"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/open\/clinic?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/open\/clinic?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/open\/clinic",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
 
 ### HTTP Request
 `GET api/open/clinic`
 
 
 <!-- END_49d6a3543680fabc28f79cd1087e1a6d -->
+
+<!-- START_5b3f2d0d0376b72e6d56ee0eb6516f90 -->
+## Get clinic
+Get clinic by id
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/open/clinic/voluptates"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "name": "达明口腔门诊部",
+    "city": "广州",
+    "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "position": "23.544983,113.595114",
+    "address": "广州市从化区河东北路5号",
+    "intro": "暂无介绍"
+}
+```
+
+### HTTP Request
+`GET api/open/clinic/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the clinic
+
+<!-- END_5b3f2d0d0376b72e6d56ee0eb6516f90 -->
+
+<!-- START_2912e85b482ca29aa9443bfd4ea6e44b -->
+## Get doctors by clinic
+Get doctors by clinic id
+
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/open/clinic/porro/doctor"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+[
+    {
+        "name": "测试医生"
+    }
+]
+```
+
+### HTTP Request
+`GET api/open/clinic/{id}/doctor`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the clinic
+
+<!-- END_2912e85b482ca29aa9443bfd4ea6e44b -->
 
 #Doctor
 
@@ -359,7 +454,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "tenetur"
+    "certificate": "eos"
 }
 
 fetch(url, {
@@ -616,7 +711,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/doctor/patientCase/natus"
+    "http://localhost/api/doctor/patientCase/accusantium"
 );
 
 
@@ -652,7 +747,7 @@ const url = new URL(
 );
 
 let params = {
-    "page": "inventore",
+    "page": "1",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -682,7 +777,9 @@ Parameter | Status | Description
 
 APIs for Management
 <!-- START_5a871f557e56944e43c2995b83e7ee9b -->
-## api/management/user
+## Get all users
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
@@ -707,12 +804,14 @@ fetch(url, {
 <!-- END_5a871f557e56944e43c2995b83e7ee9b -->
 
 <!-- START_5c64d602e9b6db7f5e9ae2ebbd1e794a -->
-## api/management/user/{id}
+## Get user
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/1"
+    "http://localhost/api/management/user/suscipit"
 );
 
 
@@ -728,11 +827,18 @@ fetch(url, {
 ### HTTP Request
 `GET api/management/user/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the user
 
 <!-- END_5c64d602e9b6db7f5e9ae2ebbd1e794a -->
 
 <!-- START_85b26dfb7c0629679f8d09667a72a8b1 -->
-## api/management/clinic
+## Get all clinic
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
@@ -757,12 +863,14 @@ fetch(url, {
 <!-- END_85b26dfb7c0629679f8d09667a72a8b1 -->
 
 <!-- START_a867e88b69e1796806dcd6bc4ad72d81 -->
-## api/management/clinic/{id}
+## Get clinic
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/1"
+    "http://localhost/api/management/clinic/eligendi"
 );
 
 
@@ -778,11 +886,18 @@ fetch(url, {
 ### HTTP Request
 `GET api/management/clinic/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the clinic
 
 <!-- END_a867e88b69e1796806dcd6bc4ad72d81 -->
 
 <!-- START_1360ec9f315bee8c1c4899c57a9b9b51 -->
-## api/management/order
+## Get all order
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
@@ -807,12 +922,14 @@ fetch(url, {
 <!-- END_1360ec9f315bee8c1c4899c57a9b9b51 -->
 
 <!-- START_61c49863786f10cddcc25fb7d05e86d7 -->
-## api/management/order/{id}
+## Get order
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/1"
+    "http://localhost/api/management/order/quia"
 );
 
 
@@ -828,6 +945,11 @@ fetch(url, {
 ### HTTP Request
 `GET api/management/order/{id}`
 
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the order
 
 <!-- END_61c49863786f10cddcc25fb7d05e86d7 -->
 

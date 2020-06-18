@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "06a6e79f-05c6-4e5f-a85a-6570dd6e7c0e",
+        "_postman_id": "e6757a61-0df5-45e9-92c8-c59a96e8b258",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -138,12 +138,12 @@
             "description": "Public APIs for getting clinic info.",
             "item": [
                 {
-                    "name": "api\/open\/clinics",
+                    "name": "Get clinics\nGet clinic list",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
-                            "path": "api\/open\/clinics",
+                            "path": "api\/open\/clinic",
                             "query": []
                         },
                         "method": "GET",
@@ -162,13 +162,53 @@
                     }
                 },
                 {
-                    "name": "api\/open\/clinic",
+                    "name": "Get clinic\nGet clinic by id",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
-                            "path": "api\/open\/clinic",
-                            "query": []
+                            "path": "api\/open\/clinic\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "voluptates",
+                                    "description": "The ID of the clinic"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get doctors by clinic\nGet doctors by clinic id",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/open\/clinic\/:id\/doctor",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "porro",
+                                    "description": "The ID of the clinic"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -233,7 +273,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"tenetur\"\n}"
+                            "raw": "{\n    \"certificate\": \"eos\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -386,7 +426,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "natus",
+                                    "value": "accusantium",
                                     "description": "The ID of the case"
                                 }
                             ]
@@ -416,7 +456,7 @@
                             "query": [
                                 {
                                     "key": "page",
-                                    "value": "inventore",
+                                    "value": "1",
                                     "description": "Page of the request.",
                                     "disabled": false
                                 }
@@ -444,7 +484,7 @@
             "description": "APIs for Management",
             "item": [
                 {
-                    "name": "api\/management\/user",
+                    "name": "Get all users",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -468,13 +508,21 @@
                     }
                 },
                 {
-                    "name": "api\/management\/user\/{id}",
+                    "name": "Get user",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/management\/user\/:id",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "suscipit",
+                                    "description": "The ID of the user"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -492,7 +540,7 @@
                     }
                 },
                 {
-                    "name": "api\/management\/clinic",
+                    "name": "Get all clinic",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -516,13 +564,21 @@
                     }
                 },
                 {
-                    "name": "api\/management\/clinic\/{id}",
+                    "name": "Get clinic",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/management\/clinic\/:id",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "eligendi",
+                                    "description": "The ID of the clinic"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -540,7 +596,7 @@
                     }
                 },
                 {
-                    "name": "api\/management\/order",
+                    "name": "Get all order",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -564,13 +620,21 @@
                     }
                 },
                 {
-                    "name": "api\/management\/order\/{id}",
+                    "name": "Get order",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/management\/order\/:id",
-                            "query": []
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quia",
+                                    "description": "The ID of the order"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
