@@ -47,6 +47,7 @@ class TestSeeder extends Seeder
                 'city' => '广州',
                 'image' => 'http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg',
                 'position' => '23.544983,113.595114',
+                'address' => '广州市从化区河东北路5号',
                 'intro' => '暂无介绍'
             ]
         ]);
