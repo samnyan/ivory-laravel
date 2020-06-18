@@ -24,7 +24,7 @@ class CreateOrderDetailTable extends Migration
             $table->json('product_params')->nullable(false)->comment('JSON格式的产品参数');
             $table->integer('product_count')->nullable(false)->comment('产品数量');
             $table->integer('product_price')->nullable(false)->comment('价格');
-            $table->string('customer_comments', 50)->nullable(false)
+            $table->string('customer_comments', 50)->nullable(true)
                 ->comment('客户备注');
 
         });

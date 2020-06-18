@@ -126,14 +126,27 @@ class DoctorController extends Controller
      * "name": "某人",
      * "age": 10,
      * "sex": 0,
-     * "comments": "无"
+     * "comments": "无",
+     * "patient_cases": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗"
+     * }
+     * ]
      * }
      * @param $id integer
      * @return Patient|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
     public function getPatient($id)
     {
-        return Patient::whereId($id)->whereUserId(auth()->id())->firstOrFail();
+        return Patient::whereId($id)->whereUserId(auth()->id())->with('patientCases')->firstOrFail();
     }
 
     /**
@@ -173,11 +186,37 @@ class DoctorController extends Controller
      * Get cases
      * @authenticated
      * Get all cases created by this user.
+     * @response {
+     * "current_page": 1,
+     * "data": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗"
+     * }
+     * ],
+     * "first_page_url": "http://localhost:8000/api/doctor/patientCase?page=1",
+     * "from": 1,
+     * "last_page": 1,
+     * "last_page_url": "http://localhost:8000/api/doctor/patientCase?page=1",
+     * "next_page_url": null,
+     * "path": "http://localhost:8000/api/doctor/patientCase",
+     * "per_page": 15,
+     * "prev_page_url": null,
+     * "to": 1,
+     * "total": 1
+     * }
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getCases()
     {
-        return PatientCase::whereUserId(auth()->user())->paginate(15);
+        return PatientCase::whereUserId(auth()->id())->paginate(15);
     }
 
     /**
@@ -185,13 +224,51 @@ class DoctorController extends Controller
      * @authenticated
      * Get case by id
      * @urlParam id required The ID of the case
+     * @response {
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "patient_id": "DLE200617083554",
+    "user_id": 2,
+    "state": 2,
+    "features": "无症状",
+    "files": "{}",
+    "therapy_program": "无需治疗",
+    "orders": [
+    {
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": 1,
+    "state": 0,
+    "product_count": 0,
+    "product_amount_total": null,
+    "order_amount_total": null,
+    "logistics_fee": null,
+    "address_id": 1,
+    "logistics_no": null,
+    "pay_channel": null,
+    "pay_no": null,
+    "delivery_time": null,
+    "pay_time": null,
+    "order_settlement_status": null,
+    "order_settlement_time": null,
+    "fapiao_id": null,
+    "comments": "无备注"
+    }
+    ]
+    }
      * @param Request $request
      * @param $id integer of case
      * @return PatientCase|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
     public function getCase(Request $request, $id)
     {
-        return PatientCase::whereId($id)->whereUserId(auth()->id())->firstOrFail();
+        return PatientCase::whereId($id)->whereUserId(auth()->id())->with('orders')->firstOrFail();
     }
 
     /**
@@ -199,11 +276,102 @@ class DoctorController extends Controller
      * @authenticated
      * Get all order related to this user
      * @queryParam page Page of the request. Example: 1
+     * @response {
+     * "current_page": 1,
+     * "data": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "clinic_id": 1,
+     * "professor_id": 1,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": 1,
+     * "state": 0,
+     * "product_count": 0,
+     * "product_amount_total": null,
+     * "order_amount_total": null,
+     * "logistics_fee": null,
+     * "address_id": 1,
+     * "logistics_no": null,
+     * "pay_channel": null,
+     * "pay_no": null,
+     * "delivery_time": null,
+     * "pay_time": null,
+     * "order_settlement_status": null,
+     * "order_settlement_time": null,
+     * "fapiao_id": null,
+     * "comments": "无备注"
+     * }
+     * ],
+     * "first_page_url": "http://localhost:8000/api/doctor/order?page=1",
+     * "from": 1,
+     * "last_page": 1,
+     * "last_page_url": "http://localhost:8000/api/doctor/order?page=1",
+     * "next_page_url": null,
+     * "path": "http://localhost:8000/api/doctor/order",
+     * "per_page": 15,
+     * "prev_page_url": null,
+     * "to": 1,
+     * "total": 1
+     * }
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getOrders()
     {
-        return Order::whereUserId(auth()->id())->paginate(15);
+        return Order::whereDoctorId(auth()->id())->paginate(15);
+    }
+
+    /**
+     * Get order by id
+     * @authenticated
+     * Get order by id.
+     * @response {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "clinic_id": 1,
+     * "professor_id": 1,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": 1,
+     * "state": 0,
+     * "product_count": 0,
+     * "product_amount_total": null,
+     * "order_amount_total": null,
+     * "logistics_fee": null,
+     * "address_id": 1,
+     * "logistics_no": null,
+     * "pay_channel": null,
+     * "pay_no": null,
+     * "delivery_time": null,
+     * "pay_time": null,
+     * "order_settlement_status": null,
+     * "order_settlement_time": null,
+     * "fapiao_id": null,
+     * "comments": "无备注",
+     * "order_detail": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "order_id": 1,
+     * "product_no": "XXSD02",
+     * "product_name": "器具",
+     * "product_params": "{\"size\": 0}",
+     * "product_count": 2,
+     * "product_price": 20,
+     * "customer_comments": "无备注"
+     * }
+     * ]
+     * }
+     * @param $id
+     * @return Order|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function getOrder($id)
+    {
+        return Order::whereDoctorId(auth()->id())->whereKey($id)->with('orderDetail')->firstOrFail();
     }
 
     public function createOrder(Request $request)

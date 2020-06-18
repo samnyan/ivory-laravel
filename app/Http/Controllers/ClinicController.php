@@ -79,28 +79,6 @@ class ClinicController extends Controller
      */
     public function getClinic($id)
     {
-        return Clinic::whereId($id)->firstOrFail();
-    }
-
-    /**
-     * Get doctors by clinic
-     * Get doctors by clinic id
-     * @urlParam id required The ID of the clinic
-     * @response [
-     * {
-     * "name": "测试医生"
-     * }
-     * ]
-     * @param $id
-     * @return array
-     */
-    public function getClinicDoctor($id)
-    {
-        $doctors = Clinic::whereId($id)->firstOrFail()->doctors;
-        $temp = array();
-        foreach ($doctors as $doctor) {
-            array_push($temp, ['name' => $doctor->username]);
-        }
-        return $temp;
+        return Clinic::whereId($id)->with('users:clinic_id,username,school,major')->firstOrFail();
     }
 }

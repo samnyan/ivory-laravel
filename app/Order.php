@@ -8,9 +8,14 @@ class Order extends Model
 {
     protected $table = 'orders';
 
-    public function user()
+    public function doctor()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'id', 'doctor_id');
+    }
+
+    public function professor()
+    {
+        return $this->belongsTo('App\User', 'id', 'professor_id');
     }
 
     /**

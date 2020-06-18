@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "e6757a61-0df5-45e9-92c8-c59a96e8b258",
+        "_postman_id": "1581de61-adc7-405f-a4a2-bc3fd5730abf",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -173,39 +173,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptates",
-                                    "description": "The ID of the clinic"
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Get doctors by clinic\nGet doctors by clinic id",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/open\/clinic\/:id\/doctor",
-                            "query": [],
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "porro",
+                                    "value": "earum",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -273,7 +241,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"eos\"\n}"
+                            "raw": "{\n    \"certificate\": \"natus\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -426,7 +394,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "accusantium",
+                                    "value": "a",
                                     "description": "The ID of the case"
                                 }
                             ]
@@ -461,6 +429,30 @@
                                     "disabled": false
                                 }
                             ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get order by id",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order\/:id",
+                            "query": []
                         },
                         "method": "GET",
                         "header": [
@@ -519,7 +511,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "suscipit",
+                                    "value": "voluptatem",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -575,7 +567,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eligendi",
+                                    "value": "nam",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -631,7 +623,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quia",
+                                    "value": "error",
                                     "description": "The ID of the order"
                                 }
                             ]

@@ -40,6 +40,23 @@ class TestSeeder extends Seeder
             'major' => '忽悠专业'
         ]);
 
+        DB::table('addresses')->insert([
+            [
+                'id' => 1,
+                'user_id' => 2,
+                'real_name' => '某医生',
+                'telephone' => '13800000000',
+                'country' => 86,
+                'province' => 44,
+                'city' => 01,
+                'area' => 84,
+                'street' => '某街道',
+                'zip' => 500000,
+                'is_default' => true,
+
+            ]
+        ]);
+
         DB::table('clinics')->insert([
             [
                 'id' => 1,
@@ -63,20 +80,43 @@ class TestSeeder extends Seeder
             ]
         ]);
 
-        DB::table('addresses')->insert([
+        DB::table('patient_cases')->insert([
             [
                 'id' => 1,
+                'patient_id' => 'DLE200617083554',
                 'user_id' => 2,
-                'real_name' => '某医生',
-                'telephone' => '13800000000',
-                'country' => 86,
-                'province' => 44,
-                'city' => 01,
-                'area' => 84,
-                'street' => '某街道',
-                'zip' => 500000,
-                'is_default' => true,
+                'state' => 2,
+                'features' => '无症状',
+                'files' => '{}',
+                'therapy_program' => '无需治疗'
+            ]
+        ]);
 
+        DB::table('orders')->insert([
+            [
+                'id' => 1,
+                'clinic_id' => 1,
+                'professor_id' => 1,
+                'doctor_id' => 2,
+                'patient_case_id' => 1,
+                'is_first' => true,
+                'state' => 0,
+                'product_count' => 0,
+                'address_id' => 1,
+                'comments' => '无备注'
+            ]
+        ]);
+
+        DB::table('order_detail')->insert([
+            [
+                'id' => 1,
+                'order_id' => 1,
+                'product_no' => 'XXSD02',
+                'product_name' => '器具',
+                'product_params' => '{"size": 0}',
+                'product_count' => 2,
+                'product_price' => 20,
+                'customer_comments' => '无备注'
             ]
         ]);
     }

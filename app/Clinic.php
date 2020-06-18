@@ -8,8 +8,8 @@ class Clinic extends Model
 {
     protected $table = 'clinics';
 
-    public function doctors()
+    public function users()
     {
-        return $this->hasMany('App\User', 'clinic_id');
+        return $this->hasMany('App\User', 'clinic_id', 'id');
     }
 }

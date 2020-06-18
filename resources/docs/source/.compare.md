@@ -327,7 +327,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/voluptates"
+    "http://localhost/api/open/clinic/earum"
 );
 
 
@@ -365,47 +365,6 @@ Parameter | Status | Description
     `id` |  required  | The ID of the clinic
 
 <!-- END_5b3f2d0d0376b72e6d56ee0eb6516f90 -->
-
-<!-- START_2912e85b482ca29aa9443bfd4ea6e44b -->
-## Get doctors by clinic
-Get doctors by clinic id
-
-> Example request:
-
-```javascript
-const url = new URL(
-    "http://localhost/api/open/clinic/porro/doctor"
-);
-
-
-fetch(url, {
-    method: "GET",
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (200):
-
-```json
-[
-    {
-        "name": "测试医生"
-    }
-]
-```
-
-### HTTP Request
-`GET api/open/clinic/{id}/doctor`
-
-#### URL Parameters
-
-Parameter | Status | Description
---------- | ------- | ------- | -------
-    `id` |  required  | The ID of the clinic
-
-<!-- END_2912e85b482ca29aa9443bfd4ea6e44b -->
 
 #Doctor
 
@@ -454,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "eos"
+    "certificate": "natus"
 }
 
 fetch(url, {
@@ -614,7 +573,20 @@ fetch(url, {
     "name": "某人",
     "age": 10,
     "sex": 0,
-    "comments": "无"
+    "comments": "无",
+    "patient_cases": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "patient_id": "DLE200617083554",
+            "user_id": 2,
+            "state": 2,
+            "features": "无症状",
+            "files": "{}",
+            "therapy_program": "无需治疗"
+        }
+    ]
 }
 ```
 
@@ -696,6 +668,36 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "patient_id": "DLE200617083554",
+            "user_id": 2,
+            "state": 2,
+            "features": "无症状",
+            "files": "{}",
+            "therapy_program": "无需治疗"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/doctor\/patientCase?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/doctor\/patientCase?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/doctor\/patientCase",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
 
 ### HTTP Request
 `GET api/doctor/patientCase`
@@ -711,7 +713,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/doctor/patientCase/accusantium"
+    "http://localhost/api/doctor/patientCase/a"
 );
 
 
@@ -723,6 +725,48 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "patient_id": "DLE200617083554",
+    "user_id": 2,
+    "state": 2,
+    "features": "无症状",
+    "files": "{}",
+    "therapy_program": "无需治疗",
+    "orders": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "clinic_id": 1,
+            "professor_id": 1,
+            "doctor_id": 2,
+            "patient_case_id": 1,
+            "is_first": 1,
+            "state": 0,
+            "product_count": 0,
+            "product_amount_total": null,
+            "order_amount_total": null,
+            "logistics_fee": null,
+            "address_id": 1,
+            "logistics_no": null,
+            "pay_channel": null,
+            "pay_no": null,
+            "delivery_time": null,
+            "pay_time": null,
+            "order_settlement_status": null,
+            "order_settlement_time": null,
+            "fapiao_id": null,
+            "comments": "无备注"
+        }
+    ]
+}
+```
 
 ### HTTP Request
 `GET api/doctor/patientCase/{id}`
@@ -761,6 +805,50 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "clinic_id": 1,
+            "professor_id": 1,
+            "doctor_id": 2,
+            "patient_case_id": 1,
+            "is_first": 1,
+            "state": 0,
+            "product_count": 0,
+            "product_amount_total": null,
+            "order_amount_total": null,
+            "logistics_fee": null,
+            "address_id": 1,
+            "logistics_no": null,
+            "pay_channel": null,
+            "pay_no": null,
+            "delivery_time": null,
+            "pay_time": null,
+            "order_settlement_status": null,
+            "order_settlement_time": null,
+            "fapiao_id": null,
+            "comments": "无备注"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/doctor\/order?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/doctor\/order?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/doctor\/order",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
 
 ### HTTP Request
 `GET api/doctor/order`
@@ -772,6 +860,76 @@ Parameter | Status | Description
     `page` |  optional  | Page of the request.
 
 <!-- END_ff11b8c6f70c4d81bf372cc58c5ba000 -->
+
+<!-- START_c90b2590e8f65d2cdb6d50d1ea4a1c33 -->
+## Get order by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": 1,
+    "state": 0,
+    "product_count": 0,
+    "product_amount_total": null,
+    "order_amount_total": null,
+    "logistics_fee": null,
+    "address_id": 1,
+    "logistics_no": null,
+    "pay_channel": null,
+    "pay_no": null,
+    "delivery_time": null,
+    "pay_time": null,
+    "order_settlement_status": null,
+    "order_settlement_time": null,
+    "fapiao_id": null,
+    "comments": "无备注",
+    "order_detail": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "order_id": 1,
+            "product_no": "XXSD02",
+            "product_name": "器具",
+            "product_params": "{\"size\": 0}",
+            "product_count": 2,
+            "product_price": 20,
+            "customer_comments": "无备注"
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/doctor/order/{id}`
+
+
+<!-- END_c90b2590e8f65d2cdb6d50d1ea4a1c33 -->
 
 #Management
 
@@ -811,7 +969,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/suscipit"
+    "http://localhost/api/management/user/voluptatem"
 );
 
 
@@ -870,7 +1028,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/eligendi"
+    "http://localhost/api/management/clinic/nam"
 );
 
 
@@ -929,7 +1087,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/quia"
+    "http://localhost/api/management/order/error"
 );
 
 

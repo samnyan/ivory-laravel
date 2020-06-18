@@ -20,7 +20,6 @@ Route::group([
 ], function () {
     Route::get('clinic', 'ClinicController@getClinics');
     Route::get('clinic/{id}', 'ClinicController@getClinic');
-    Route::get('clinic/{id}/doctor', 'ClinicController@getClinicDoctor');
 });
 
 // Api endpoint for authentication
@@ -50,6 +49,7 @@ Route::group([
     Route::get('patientCase', 'DoctorController@getCases');
     Route::get('patientCase/{id}', 'DoctorController@getCase');
     Route::get('order', 'DoctorController@getOrders');
+    Route::get('order/{id}', 'DoctorController@getOrder');
 });
 
 // Api endpoint for Professor
