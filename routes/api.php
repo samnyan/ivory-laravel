@@ -19,7 +19,7 @@ Route::group([
     'prefix' => 'open'
 ], function () {
     Route::get('clinics', 'ClinicController@getClinics');
-    Route::get('clinic', 'ClinicController@getClinic');
+    Route::get('clinic/{id}', 'ClinicController@getClinic');
 });
 
 // Api endpoint for authentication
