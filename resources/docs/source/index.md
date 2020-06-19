@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/dolore"
+    "http://localhost/api/open/clinic/porro"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "deserunt"
+    "certificate": "et"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "expedita"
+    "intro": "dolorum"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "voluptas"
+    "image": "quo"
 }
 
 fetch(url, {
@@ -1072,7 +1072,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/sit"
+    "http://localhost/api/management/user/non"
 );
 
 
@@ -1131,7 +1131,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/tempore"
+    "http://localhost/api/management/clinic/minus"
 );
 
 
@@ -1190,7 +1190,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/nam"
+    "http://localhost/api/management/order/voluptas"
 );
 
 
@@ -1261,20 +1261,26 @@ fetch(url, {
             "patient_case_id": 1,
             "is_first": 1,
             "state": 0,
-            "product_count": 0,
-            "product_amount_total": null,
-            "order_amount_total": null,
-            "logistics_fee": null,
+            "product_count": 3,
+            "total_price": 1000,
+            "payment_price": 998,
+            "shipping_fee": 14,
+            "pay_method": 1,
+            "pay_number": "15233958572390",
+            "pay_time": "2020-06-19 13:26:43",
+            "tracking_number": "SF000002231231",
             "address_id": 1,
-            "logistics_no": null,
-            "pay_channel": null,
-            "pay_no": null,
-            "delivery_time": null,
-            "pay_time": null,
-            "order_settlement_status": null,
-            "order_settlement_time": null,
-            "fapiao_id": null,
-            "comments": "无备注"
+            "shipping_time": "2020-06-19 13:26:43",
+            "fapiao_id": 1,
+            "comments": "无备注",
+            "doctor": {
+                "id": 2,
+                "username": "测试医生"
+            },
+            "clinic": {
+                "id": 1,
+                "name": "达明口腔门诊部"
+            }
         }
     ],
     "first_page_url": "http:\/\/localhost:8000\/api\/professor\/order?page=1",
