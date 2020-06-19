@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "9f3761d1-9e24-43d3-9633-8a25020eb4eb",
+        "_postman_id": "e94c1f9c-ed3c-4109-9e3d-2f7c7f0e23f5",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -192,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "tempora",
+                                    "value": "dolore",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"tempore\"\n}"
+                            "raw": "{\n    \"certificate\": \"deserunt\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -284,7 +284,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"aut\"\n}"
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"expedita\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -308,7 +308,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"image\": \"illum\"\n}"
+                            "raw": "{\n    \"image\": \"voluptas\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -554,7 +554,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "sit",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -610,7 +610,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "tempore",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -666,7 +666,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "deserunt",
+                                    "value": "nam",
                                     "description": "The ID of the order"
                                 }
                             ]

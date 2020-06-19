@@ -109,8 +109,17 @@ class TestSeeder extends Seeder
                 'patient_case_id' => 1,
                 'is_first' => true,
                 'state' => 0,
-                'product_count' => 0,
+                'product_count' => 3,
+                'total_price' => 1000,
+                'payment_price' => 998,
+                'shipping_fee' => 14,
+                'pay_method' => 1,
+                'pay_number' => '15233958572390',
+                'pay_time' => '2020-06-19 13:26:43',
+                'tracking_number' => 'SF000002231231',
                 'address_id' => 1,
+                'shipping_time' => '2020-06-19 13:26:43',
+                'fapiao_id' => 1,
                 'comments' => '无备注'
             ]
         ]);

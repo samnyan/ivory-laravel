@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/tempora"
+    "http://localhost/api/open/clinic/dolore"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "tempore"
+    "certificate": "deserunt"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "aut"
+    "intro": "expedita"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "illum"
+    "image": "voluptas"
 }
 
 fetch(url, {
@@ -928,19 +928,17 @@ fetch(url, {
             "patient_case_id": 1,
             "is_first": 1,
             "state": 0,
-            "product_count": 0,
-            "product_amount_total": null,
-            "order_amount_total": null,
-            "logistics_fee": null,
+            "product_count": 3,
+            "total_price": 1000,
+            "payment_price": 998,
+            "shipping_fee": 14,
+            "pay_method": 1,
+            "pay_number": "15233958572390",
+            "pay_time": "2020-06-19 13:26:43",
+            "tracking_number": "SF000002231231",
             "address_id": 1,
-            "logistics_no": null,
-            "pay_channel": null,
-            "pay_no": null,
-            "delivery_time": null,
-            "pay_time": null,
-            "order_settlement_status": null,
-            "order_settlement_time": null,
-            "fapiao_id": null,
+            "shipping_time": "2020-06-19 13:26:43",
+            "fapiao_id": 1,
             "comments": "无备注"
         }
     ],
@@ -1001,19 +999,17 @@ fetch(url, {
     "patient_case_id": 1,
     "is_first": 1,
     "state": 0,
-    "product_count": 0,
-    "product_amount_total": null,
-    "order_amount_total": null,
-    "logistics_fee": null,
+    "product_count": 3,
+    "total_price": 1000,
+    "payment_price": 998,
+    "shipping_fee": 14,
+    "pay_method": 1,
+    "pay_number": "15233958572390",
+    "pay_time": "2020-06-19 13:26:43",
+    "tracking_number": "SF000002231231",
     "address_id": 1,
-    "logistics_no": null,
-    "pay_channel": null,
-    "pay_no": null,
-    "delivery_time": null,
-    "pay_time": null,
-    "order_settlement_status": null,
-    "order_settlement_time": null,
-    "fapiao_id": null,
+    "shipping_time": "2020-06-19 13:26:43",
+    "fapiao_id": 1,
     "comments": "无备注",
     "order_detail": [
         {
@@ -1076,7 +1072,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/qui"
+    "http://localhost/api/management/user/sit"
 );
 
 
@@ -1135,7 +1131,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/enim"
+    "http://localhost/api/management/clinic/tempore"
 );
 
 
@@ -1194,7 +1190,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/deserunt"
+    "http://localhost/api/management/order/nam"
 );
 
 
