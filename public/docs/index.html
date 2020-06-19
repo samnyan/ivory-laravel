@@ -346,7 +346,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/open/clinic/earum"
+    "http://localhost/api/open/clinic/qui"
 );
 
 fetch(url, {
@@ -366,7 +366,15 @@ fetch(url, {
     "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
     "position": "23.544983,113.595114",
     "address": "广州市从化区河东北路5号",
-    "intro": "暂无介绍"
+    "intro": "暂无介绍",
+    "users": [
+        {
+            "clinic_id": 1,
+            "username": "测试医生",
+            "school": "没读大学",
+            "major": "忽悠专业"
+        }
+    ]
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/open/clinic/{id}</code></p>
@@ -424,7 +432,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "natus"
+    "certificate": "optio"
 }
 
 fetch(url, {
@@ -737,7 +745,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/doctor/patientCase/a"
+    "http://localhost/api/doctor/patientCase/1"
 );
 
 fetch(url, {
@@ -801,7 +809,7 @@ fetch(url, {
 <tr>
 <td><code>id</code></td>
 <td>required</td>
-<td>The ID of the case</td>
+<td>The ID of the case.</td>
 </tr>
 </tbody>
 </table>
@@ -977,7 +985,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/user/voluptatem"
+    "http://localhost/api/management/user/dolor"
 );
 
 fetch(url, {
@@ -1030,7 +1038,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/clinic/nam"
+    "http://localhost/api/management/clinic/ullam"
 );
 
 fetch(url, {
@@ -1083,7 +1091,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/order/error"
+    "http://localhost/api/management/order/quis"
 );
 
 fetch(url, {
@@ -1111,6 +1119,252 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_61c49863786f10cddcc25fb7d05e86d7 -->
+<h1>Professor</h1>
+<p>APIs for Professor</p>
+<!-- START_65a81fc36db06a4b37fd19107fbd7037 -->
+<h2>Get orders</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/order"
+);
+
+let params = {
+    "state": "0",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "clinic_id": 1,
+            "professor_id": 1,
+            "doctor_id": 2,
+            "patient_case_id": 1,
+            "is_first": 1,
+            "state": 0,
+            "product_count": 0,
+            "product_amount_total": null,
+            "order_amount_total": null,
+            "logistics_fee": null,
+            "address_id": 1,
+            "logistics_no": null,
+            "pay_channel": null,
+            "pay_no": null,
+            "delivery_time": null,
+            "pay_time": null,
+            "order_settlement_status": null,
+            "order_settlement_time": null,
+            "fapiao_id": null,
+            "comments": "无备注"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/professor\/order?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/professor\/order?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/professor\/order",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/professor/order</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>optional</td>
+<td>The state of order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货) .</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>optional</td>
+<td>The page number to return.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
+<!-- START_98ee8a4dfd57993014310b0527480cfc -->
+<h2>Get Doctors</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/doctor"
+);
+
+let params = {
+    "state": "0",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/professor/doctor</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>optional</td>
+<td>The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过) .</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>optional</td>
+<td>The page number to return.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_98ee8a4dfd57993014310b0527480cfc -->
+<!-- START_e4606795c4d9f6abaa910fa9a0d719d0 -->
+<h2>Get doctor</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/doctor/1"
+);
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/professor/doctor/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the doctor.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_e4606795c4d9f6abaa910fa9a0d719d0 -->
+<!-- START_7eec77d560fdd163da4a7642a3e97df4 -->
+<h2>Update doctor</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/doctor/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "certificateChecked": 0,
+    "clinicId": 0
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/professor/doctor/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the doctor.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>certificateChecked</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The certificate state of the doctor.</td>
+</tr>
+<tr>
+<td><code>clinicId</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The clinic id of the doctor.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_7eec77d560fdd163da4a7642a3e97df4 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

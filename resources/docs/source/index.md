@@ -327,7 +327,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/earum"
+    "http://localhost/api/open/clinic/qui"
 );
 
 
@@ -351,7 +351,15 @@ fetch(url, {
     "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
     "position": "23.544983,113.595114",
     "address": "广州市从化区河东北路5号",
-    "intro": "暂无介绍"
+    "intro": "暂无介绍",
+    "users": [
+        {
+            "clinic_id": 1,
+            "username": "测试医生",
+            "school": "没读大学",
+            "major": "忽悠专业"
+        }
+    ]
 }
 ```
 
@@ -413,7 +421,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "natus"
+    "certificate": "optio"
 }
 
 fetch(url, {
@@ -713,7 +721,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/doctor/patientCase/a"
+    "http://localhost/api/doctor/patientCase/1"
 );
 
 
@@ -775,7 +783,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | The ID of the case
+    `id` |  required  | The ID of the case.
 
 <!-- END_4bed066ce46b16ab75eb1801478c9174 -->
 
@@ -969,7 +977,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/voluptatem"
+    "http://localhost/api/management/user/dolor"
 );
 
 
@@ -1028,7 +1036,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/nam"
+    "http://localhost/api/management/clinic/ullam"
 );
 
 
@@ -1087,7 +1095,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/error"
+    "http://localhost/api/management/order/quis"
 );
 
 
@@ -1110,5 +1118,212 @@ Parameter | Status | Description
     `id` |  required  | The ID of the order
 
 <!-- END_61c49863786f10cddcc25fb7d05e86d7 -->
+
+#Professor
+
+APIs for Professor
+<!-- START_65a81fc36db06a4b37fd19107fbd7037 -->
+## Get orders
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order"
+);
+
+let params = {
+    "state": "0",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "clinic_id": 1,
+            "professor_id": 1,
+            "doctor_id": 2,
+            "patient_case_id": 1,
+            "is_first": 1,
+            "state": 0,
+            "product_count": 0,
+            "product_amount_total": null,
+            "order_amount_total": null,
+            "logistics_fee": null,
+            "address_id": 1,
+            "logistics_no": null,
+            "pay_channel": null,
+            "pay_no": null,
+            "delivery_time": null,
+            "pay_time": null,
+            "order_settlement_status": null,
+            "order_settlement_time": null,
+            "fapiao_id": null,
+            "comments": "无备注"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/professor\/order?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/professor\/order?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/professor\/order",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
+
+### HTTP Request
+`GET api/professor/order`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `state` |  optional  | The state of order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货) .
+    `page` |  optional  | The page number to return.
+
+<!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
+
+<!-- START_98ee8a4dfd57993014310b0527480cfc -->
+## Get Doctors
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/doctor"
+);
+
+let params = {
+    "state": "0",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/professor/doctor`
+
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `state` |  optional  | The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过) .
+    `page` |  optional  | The page number to return.
+
+<!-- END_98ee8a4dfd57993014310b0527480cfc -->
+
+<!-- START_e4606795c4d9f6abaa910fa9a0d719d0 -->
+## Get doctor
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/doctor/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET api/professor/doctor/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the doctor.
+
+<!-- END_e4606795c4d9f6abaa910fa9a0d719d0 -->
+
+<!-- START_7eec77d560fdd163da4a7642a3e97df4 -->
+## Update doctor
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/doctor/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "certificateChecked": 0,
+    "clinicId": 0
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/professor/doctor/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the doctor.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `certificateChecked` | integer |  optional  | The certificate state of the doctor.
+        `clinicId` | integer |  optional  | The clinic id of the doctor.
+    
+<!-- END_7eec77d560fdd163da4a7642a3e97df4 -->
 
 

@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "1581de61-adc7-405f-a4a2-bc3fd5730abf",
+        "_postman_id": "05eecf19-1733-4d5a-87d3-0dc84aff758a",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "earum",
+                                    "value": "qui",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -241,7 +241,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"natus\"\n}"
+                            "raw": "{\n    \"certificate\": \"optio\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -394,8 +394,8 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "a",
-                                    "description": "The ID of the case"
+                                    "value": "1",
+                                    "description": "The ID of the case."
                                 }
                             ]
                         },
@@ -511,7 +511,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "dolor",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -567,7 +567,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "nam",
+                                    "value": "ullam",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -623,7 +623,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "error",
+                                    "value": "quis",
                                     "description": "The ID of the order"
                                 }
                             ]
@@ -638,6 +638,150 @@
                         "body": {
                             "mode": "raw",
                             "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Professor",
+            "description": "APIs for Professor",
+            "item": [
+                {
+                    "name": "Get orders",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/order",
+                            "query": [
+                                {
+                                    "key": "state",
+                                    "value": "0",
+                                    "description": "The state of order (-1=\u53d6\u6d88\u4ea4\u6613,0=\u672a\u4ed8\u6b3e,1=\u5df2\u4ed8\u6b3e,2=\u5df2\u53d1\u8d27,3=\u5df2\u7b7e\u6536,4=\u9000\u8d27\u7533\u8bf7,5=\u9000\u8d27\u4e2d,6=\u5df2\u9000\u8d27) .",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page number to return.",
+                                    "disabled": false
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get Doctors",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/doctor",
+                            "query": [
+                                {
+                                    "key": "state",
+                                    "value": "0",
+                                    "description": "The certificate state of the doctor (0\u672a\u4e0a\u4f20\uff0c1\u5df2\u4e0a\u4f20\uff0c2\u5df2\u5ba1\u6838\u901a\u8fc7\uff0c3\u5ba1\u6838\u4e0d\u901a\u8fc7) .",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page number to return.",
+                                    "disabled": false
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get doctor",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/doctor\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the doctor."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update doctor",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/doctor\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the doctor."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"certificateChecked\": 0,\n    \"clinicId\": 0\n}"
                         },
                         "description": "",
                         "response": []

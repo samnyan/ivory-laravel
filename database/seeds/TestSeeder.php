@@ -11,7 +11,7 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('users')->insert([[
             'id' => 1,
             'username' => 'Administrator',
             'pwd' => Hash::make('12345678'),
@@ -19,7 +19,15 @@ class TestSeeder extends Seeder
             'type' => 3,
             'sex' => 0,
             'age' => 24,
-        ]);
+        ], [
+            'id' => 3,
+            'username' => 'Professor',
+            'pwd' => Hash::make('12345678'),
+            'email' => 'professor@example.com',
+            'type' => 2,
+            'sex' => 0,
+            'age' => 24,
+        ]]);
         DB::table('users')->insert([
             'id' => 2,
             'username' => '测试医生',

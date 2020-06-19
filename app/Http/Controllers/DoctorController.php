@@ -223,7 +223,7 @@ class DoctorController extends Controller
      * Get case
      * @authenticated
      * Get case by id
-     * @urlParam id required The ID of the case
+     * @urlParam id required The ID of the case. Example: 1
      * @response {
     "id": 1,
     "created_at": null,

@@ -72,7 +72,15 @@ class ClinicController extends Controller
      * "image": "http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg",
      * "position": "23.544983,113.595114",
      * "address": "广州市从化区河东北路5号",
-     * "intro": "暂无介绍"
+     * "intro": "暂无介绍",
+     * "users": [
+     * {
+     * "clinic_id": 1,
+     * "username": "测试医生",
+     * "school": "没读大学",
+     * "major": "忽悠专业"
+     * }
+     * ]
      * }
      * @param $id
      * @return Clinic|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
