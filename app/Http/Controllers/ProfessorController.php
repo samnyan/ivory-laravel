@@ -16,8 +16,8 @@ class ProfessorController extends Controller
 
     /**
      * Get orders
-     * @authenticated
      * Get order list
+     * @authenticated
      * @queryParam state The state of order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货) . Example: 0
      * @queryParam page The page number to return. Example: 1
      * @response {
@@ -76,9 +76,9 @@ class ProfessorController extends Controller
     // Doctor management
 
     /**
-     * Get Doctors
-     * @authenticated
+     * Get doctors
      * Get doctor list
+     * @authenticated
      * @queryParam state The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过) . Example: 0
      * @queryParam page The page number to return. Example: 1
      * @param Request $request
@@ -98,8 +98,8 @@ class ProfessorController extends Controller
 
     /**
      * Get doctor
-     * @authenticated
      * Get doctor by id
+     * @authenticated
      * @urlParam id required The id of the doctor. Example: 1
      * @param $id
      * @return User|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
@@ -111,8 +111,8 @@ class ProfessorController extends Controller
 
     /**
      * Update doctor
+     * Update a doctor info, mainly use to set the certificate status of a doctor.
      * @authenticated
-     * Update a doctor info
      * @urlParam id required The id of the doctor. Example: 1
      * @bodyParam certificateChecked integer The certificate state of the doctor. Example: 0
      * @bodyParam clinicId integer The clinic id of the doctor. Example: 0

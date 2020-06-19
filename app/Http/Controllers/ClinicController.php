@@ -16,6 +16,9 @@ class ClinicController extends Controller
     /**
      * Get clinics
      * Get clinic list
+     * @queryParam name Search clinic by name. Example: 牙科医院
+     * @queryParam city Filter clinic by city. Example: 广州
+     * @queryParam page The page number to return. Example: 1
      * @response {
      * "current_page": 1,
      * "data": [

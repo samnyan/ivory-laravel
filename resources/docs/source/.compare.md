@@ -141,6 +141,7 @@ Parameter | Type | Status | Description
 
 <!-- START_19ff1b6f8ce19d3c444e9b518e8f7160 -->
 ## Logout
+Log the user out (Invalidate the token).
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -175,6 +176,7 @@ fetch(url, {
 
 <!-- START_994af8f47e3039ba6d6d67c09dd9e415 -->
 ## Refresh token
+Refresh a token.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -211,6 +213,7 @@ fetch(url, {
 
 <!-- START_a47210337df3b4ba0df697c115ba0c1e -->
 ## Me
+Get the authenticated User.
 
 > Example request:
 
@@ -273,6 +276,14 @@ const url = new URL(
     "http://localhost/api/open/clinic"
 );
 
+let params = {
+    "name": "牙科医院",
+    "city": "广州",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
 
 fetch(url, {
     method: "GET",
@@ -316,6 +327,13 @@ fetch(url, {
 ### HTTP Request
 `GET api/open/clinic`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `name` |  optional  | Search clinic by name.
+    `city` |  optional  | Filter clinic by city.
+    `page` |  optional  | The page number to return.
 
 <!-- END_49d6a3543680fabc28f79cd1087e1a6d -->
 
@@ -327,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/qui"
+    "http://localhost/api/open/clinic/tempora"
 );
 
 
@@ -377,35 +395,9 @@ Parameter | Status | Description
 #Doctor
 
 APIs for Doctor
-<!-- START_5e3f194cbdab5f40a96adca0e87b3d7c -->
-## Get certificate
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```javascript
-const url = new URL(
-    "http://localhost/api/doctor/certificate"
-);
-
-
-fetch(url, {
-    method: "GET",
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`GET api/doctor/certificate`
-
-
-<!-- END_5e3f194cbdab5f40a96adca0e87b3d7c -->
-
 <!-- START_9c8a0122d4d5be39c35086fa347ddfa1 -->
 ## Upload certificate
+Form request for upload a certificate image
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -421,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "optio"
+    "certificate": "tempore"
 }
 
 fetch(url, {
@@ -447,6 +439,7 @@ Parameter | Type | Status | Description
 
 <!-- START_4b5b3a4e7e45af7dae9e7c5936895f79 -->
 ## Get clinic
+Get clinic info of the user
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -485,8 +478,109 @@ fetch(url, {
 
 <!-- END_4b5b3a4e7e45af7dae9e7c5936895f79 -->
 
+<!-- START_81f2dadc7cee29b7b241b7993b80f82c -->
+## Create clinic
+Create clinic for this doctor if this doctor doesn&#039;t belong to any clinic
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/clinic"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "\u8bca\u6240",
+    "city": "\u5e7f\u5dde",
+    "position": "23.544983,113.595114",
+    "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
+    "intro": "aut"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/doctor/clinic`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | The name of the clinic.
+        `city` | string |  required  | The city of the clinic.
+        `position` | string |  required  | The position of the clinic.
+        `address` | string |  required  | The address of the clinic.
+        `intro` | string |  required  | The description of the clinic.
+    
+<!-- END_81f2dadc7cee29b7b241b7993b80f82c -->
+
+<!-- START_8f43702e94b14a4362ed25757cc71002 -->
+## Upload clinic image
+Upload clinic image with Form data, return the uploaded url.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/clinic/image"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "image": "illum"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "上传成功",
+    "path": "clinic\/xxx.jpg"
+}
+```
+
+### HTTP Request
+`POST api/doctor/clinic/image`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `image` | binary |  optional  | The image of the clinic.
+    
+<!-- END_8f43702e94b14a4362ed25757cc71002 -->
+
 <!-- START_7140b674bc982c59a90378b528a6f925 -->
-## Get Patients
+## Get patients
+Get all patients created by this user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -552,7 +646,8 @@ Parameter | Status | Description
 <!-- END_7140b674bc982c59a90378b528a6f925 -->
 
 <!-- START_56aad3ae84439bb6bc85780542833e78 -->
-## Get Patient
+## Get patient
+Get patient by id.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -611,6 +706,7 @@ Parameter | Status | Description
 
 <!-- START_23bc824a9562eb9873b6ae7e5d042322 -->
 ## Create patient
+Create a patient
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -658,6 +754,7 @@ Parameter | Type | Status | Description
 
 <!-- START_555c845d7e367546dd34081c14d0a491 -->
 ## Get cases
+Get all cases created by this user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -715,6 +812,7 @@ fetch(url, {
 
 <!-- START_4bed066ce46b16ab75eb1801478c9174 -->
 ## Get case
+Get case by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -789,6 +887,7 @@ Parameter | Status | Description
 
 <!-- START_ff11b8c6f70c4d81bf372cc58c5ba000 -->
 ## Get orders
+Get all order related to this user
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -977,7 +1076,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/dolor"
+    "http://localhost/api/management/user/qui"
 );
 
 
@@ -1036,7 +1135,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/ullam"
+    "http://localhost/api/management/clinic/enim"
 );
 
 
@@ -1095,7 +1194,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/quis"
+    "http://localhost/api/management/order/deserunt"
 );
 
 
@@ -1124,6 +1223,7 @@ Parameter | Status | Description
 APIs for Professor
 <!-- START_65a81fc36db06a4b37fd19107fbd7037 -->
 ## Get orders
+Get order list
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -1207,7 +1307,8 @@ Parameter | Status | Description
 <!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
 
 <!-- START_98ee8a4dfd57993014310b0527480cfc -->
-## Get Doctors
+## Get doctors
+Get doctor list
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -1248,6 +1349,7 @@ Parameter | Status | Description
 
 <!-- START_e4606795c4d9f6abaa910fa9a0d719d0 -->
 ## Get doctor
+Get doctor by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -1280,6 +1382,7 @@ Parameter | Status | Description
 
 <!-- START_7eec77d560fdd163da4a7642a3e97df4 -->
 ## Update doctor
+Update a doctor info, mainly use to set the certificate status of a doctor.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:

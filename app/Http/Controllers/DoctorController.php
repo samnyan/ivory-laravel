@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clinic;
 use App\Order;
 use App\Patient;
 use App\PatientCase;
@@ -26,20 +27,9 @@ class DoctorController extends Controller
     }
 
     /**
-     * Get certificate
-     * @authenticated
-     * Get the uploaded certificate file
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function getCertificate()
-    {
-        return Storage::download(auth()->user()->certificate);
-    }
-
-    /**
      * Upload certificate
-     * @authenticated
      * Form request for upload a certificate image
+     * @authenticated
      * @bodyParam certificate binary required The file of certificate image.
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -56,8 +46,8 @@ class DoctorController extends Controller
 
     /**
      * Get clinic
-     * @authenticated
      * Get clinic info of the user
+     * @authenticated
      * @response {
      * "id": 1,
      * "created_at": null,
@@ -74,16 +64,75 @@ class DoctorController extends Controller
         return auth()->user()->clinic;
     }
 
-    public function updateClinic()
+    /**
+     * Create clinic
+     * Create clinic for this doctor if this doctor doesn't belong to any clinic
+     * @authenticated
+     * @bodyParam name string required The name of the clinic. Example: 诊所
+     * @bodyParam city string required The city of the clinic. Example: 广州
+     * @bodyParam position string required The position of the clinic. Example: 23.544983,113.595114
+     * @bodyParam address string required The address of the clinic. Example: 广州市从化区河东北路5号
+     * @bodyParam intro string required The description of the clinic.
+     * @param Request $request
+     * @return Clinic|\Illuminate\Http\JsonResponse|mixed|null
+     * @throws \Throwable
+     */
+    public function createClinic(Request $request)
     {
+        $user = auth()->user();
+        if ($user->clinic_id == null) {
+            // Create clinic
+            $request->validate([
+                'name' => 'required',
+                'city' => 'required',
+                'position' => 'required',
+                'address' => 'required',
+                'intro' => 'required',
+            ]);
 
+            $clinic = new Clinic();
+            $clinic->name = $request->get('name');
+            $clinic->city = $request->get('city');
+            $clinic->position = $request->get('position');
+            $clinic->address = $request->get('address');
+            $clinic->intro = $request->get('intro');
+
+            $clinic->saveOrFail();
+
+            $user->clinic_id = $clinic->id;
+            $user->save();
+
+            return $user->clinic;
+        } else {
+            return response()->json(['message' => '你已经添加过诊所了'], 409);
+        }
+    }
+
+    /**
+     * Upload clinic image
+     * Upload clinic image with Form data, return the uploaded url.
+     * @authenticated
+     * @bodyParam image binary The image of the clinic.
+     * @response {
+     * "message": "上传成功",
+     * "path": "clinic/xxx.jpg"
+     * }
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadClinicImage(Request $request)
+    {
+        $path = $request->file('image')->store('clinic');
+        $clinic = Clinic::whereId(auth()->user()->clinic_id)->firstOrFail();
+        $clinic->image = $path;
+        return response()->json(['message' => '上传成功', 'path' => $path]);
     }
 
     /**
      * Get patients
+     * Get all patients created by this user.
      * @authenticated
      * @queryParam  page The page number to return. Example: 1
-     * Get all patients created by this user.
      * @response {
      * "current_page": 1,
      * "data": [
@@ -117,8 +166,8 @@ class DoctorController extends Controller
 
     /**
      * Get patient
-     * @authenticated
      * Get patient by id.
+     * @authenticated
      * @urlParam id required The ID of the case. Example: DLE200617083554
      * @response {
      * "id": "DLE200617083554",
@@ -152,8 +201,8 @@ class DoctorController extends Controller
 
     /**
      * Create patient
-     * @authenticated
      * Create a patient
+     * @authenticated
      * @bodyParam name string required The name of the patient. Example: someone
      * @bodyParam age integer required The age of the patient. Example: 24
      * @bodyParam sex integer required The sex of the patient. Example: [0, 1, 2]
@@ -185,8 +234,8 @@ class DoctorController extends Controller
 
     /**
      * Get cases
-     * @authenticated
      * Get all cases created by this user.
+     * @authenticated
      * @response {
      * "current_page": 1,
      * "data": [
@@ -222,8 +271,8 @@ class DoctorController extends Controller
 
     /**
      * Get case
-     * @authenticated
      * Get case by id
+     * @authenticated
      * @urlParam id required The ID of the case. Example: 1
      * @response {
      * "id": 1,
@@ -274,8 +323,8 @@ class DoctorController extends Controller
 
     /**
      * Get orders
-     * @authenticated
      * Get all order related to this user
+     * @authenticated
      * @queryParam page Page of the request. Example: 1
      * @response {
      * "current_page": 1,
@@ -331,7 +380,6 @@ class DoctorController extends Controller
     /**
      * Get order by id
      * @authenticated
-     * Get order by id.
      * @response {
      * "id": 1,
      * "created_at": null,

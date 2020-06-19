@@ -202,6 +202,7 @@ fetch(url, {
 <!-- END_2e1c96dcffcfe7e0eb58d6408f1d619e -->
 <!-- START_19ff1b6f8ce19d3c444e9b518e8f7160 -->
 <h2>Logout</h2>
+<p>Log the user out (Invalidate the token).</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -226,6 +227,7 @@ fetch(url, {
 <!-- END_19ff1b6f8ce19d3c444e9b518e8f7160 -->
 <!-- START_994af8f47e3039ba6d6d67c09dd9e415 -->
 <h2>Refresh token</h2>
+<p>Refresh a token.</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -252,6 +254,7 @@ fetch(url, {
 <!-- END_994af8f47e3039ba6d6d67c09dd9e415 -->
 <!-- START_a47210337df3b4ba0df697c115ba0c1e -->
 <h2>Me</h2>
+<p>Get the authenticated User.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -302,6 +305,14 @@ fetch(url, {
     "http://localhost/api/open/clinic"
 );
 
+let params = {
+    "name": "牙科医院",
+    "city": "广州",
+    "page": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
 fetch(url, {
     method: "GET",
 })
@@ -338,6 +349,33 @@ fetch(url, {
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/open/clinic</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>optional</td>
+<td>Search clinic by name.</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>optional</td>
+<td>Filter clinic by city.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>optional</td>
+<td>The page number to return.</td>
+</tr>
+</tbody>
+</table>
 <!-- END_49d6a3543680fabc28f79cd1087e1a6d -->
 <!-- START_5b3f2d0d0376b72e6d56ee0eb6516f90 -->
 <h2>Get clinic</h2>
@@ -346,7 +384,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/open/clinic/qui"
+    "http://localhost/api/open/clinic/tempora"
 );
 
 fetch(url, {
@@ -398,26 +436,9 @@ fetch(url, {
 <!-- END_5b3f2d0d0376b72e6d56ee0eb6516f90 -->
 <h1>Doctor</h1>
 <p>APIs for Doctor</p>
-<!-- START_5e3f194cbdab5f40a96adca0e87b3d7c -->
-<h2>Get certificate</h2>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/doctor/certificate"
-);
-
-fetch(url, {
-    method: "GET",
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/doctor/certificate</code></p>
-<!-- END_5e3f194cbdab5f40a96adca0e87b3d7c -->
 <!-- START_9c8a0122d4d5be39c35086fa347ddfa1 -->
 <h2>Upload certificate</h2>
+<p>Form request for upload a certificate image</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -432,7 +453,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "optio"
+    "certificate": "tempore"
 }
 
 fetch(url, {
@@ -466,6 +487,7 @@ fetch(url, {
 <!-- END_9c8a0122d4d5be39c35086fa347ddfa1 -->
 <!-- START_4b5b3a4e7e45af7dae9e7c5936895f79 -->
 <h2>Get clinic</h2>
+<p>Get clinic info of the user</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -494,8 +516,142 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/doctor/clinic</code></p>
 <!-- END_4b5b3a4e7e45af7dae9e7c5936895f79 -->
+<!-- START_81f2dadc7cee29b7b241b7993b80f82c -->
+<h2>Create clinic</h2>
+<p>Create clinic for this doctor if this doctor doesn&#039;t belong to any clinic</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/doctor/clinic"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "\u8bca\u6240",
+    "city": "\u5e7f\u5dde",
+    "position": "23.544983,113.595114",
+    "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
+    "intro": "aut"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/doctor/clinic</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>required</td>
+<td>The name of the clinic.</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>string</td>
+<td>required</td>
+<td>The city of the clinic.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>string</td>
+<td>required</td>
+<td>The position of the clinic.</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>string</td>
+<td>required</td>
+<td>The address of the clinic.</td>
+</tr>
+<tr>
+<td><code>intro</code></td>
+<td>string</td>
+<td>required</td>
+<td>The description of the clinic.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_81f2dadc7cee29b7b241b7993b80f82c -->
+<!-- START_8f43702e94b14a4362ed25757cc71002 -->
+<h2>Upload clinic image</h2>
+<p>Upload clinic image with Form data, return the uploaded url.</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/doctor/clinic/image"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "image": "illum"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "上传成功",
+    "path": "clinic\/xxx.jpg"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/doctor/clinic/image</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image</code></td>
+<td>binary</td>
+<td>optional</td>
+<td>The image of the clinic.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_8f43702e94b14a4362ed25757cc71002 -->
 <!-- START_7140b674bc982c59a90378b528a6f925 -->
-<h2>Get Patients</h2>
+<h2>Get patients</h2>
+<p>Get all patients created by this user.</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -563,7 +719,8 @@ fetch(url, {
 </table>
 <!-- END_7140b674bc982c59a90378b528a6f925 -->
 <!-- START_56aad3ae84439bb6bc85780542833e78 -->
-<h2>Get Patient</h2>
+<h2>Get patient</h2>
+<p>Get patient by id.</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -624,6 +781,7 @@ fetch(url, {
 <!-- END_56aad3ae84439bb6bc85780542833e78 -->
 <!-- START_23bc824a9562eb9873b6ae7e5d042322 -->
 <h2>Create patient</h2>
+<p>Create a patient</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -693,6 +851,7 @@ fetch(url, {
 <!-- END_23bc824a9562eb9873b6ae7e5d042322 -->
 <!-- START_555c845d7e367546dd34081c14d0a491 -->
 <h2>Get cases</h2>
+<p>Get all cases created by this user.</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -740,6 +899,7 @@ fetch(url, {
 <!-- END_555c845d7e367546dd34081c14d0a491 -->
 <!-- START_4bed066ce46b16ab75eb1801478c9174 -->
 <h2>Get case</h2>
+<p>Get case by id</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -816,6 +976,7 @@ fetch(url, {
 <!-- END_4bed066ce46b16ab75eb1801478c9174 -->
 <!-- START_ff11b8c6f70c4d81bf372cc58c5ba000 -->
 <h2>Get orders</h2>
+<p>Get all order related to this user</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -985,7 +1146,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/user/dolor"
+    "http://localhost/api/management/user/qui"
 );
 
 fetch(url, {
@@ -1038,7 +1199,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/clinic/ullam"
+    "http://localhost/api/management/clinic/enim"
 );
 
 fetch(url, {
@@ -1091,7 +1252,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/order/quis"
+    "http://localhost/api/management/order/deserunt"
 );
 
 fetch(url, {
@@ -1123,6 +1284,7 @@ fetch(url, {
 <p>APIs for Professor</p>
 <!-- START_65a81fc36db06a4b37fd19107fbd7037 -->
 <h2>Get orders</h2>
+<p>Get order list</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -1212,7 +1374,8 @@ fetch(url, {
 </table>
 <!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
 <!-- START_98ee8a4dfd57993014310b0527480cfc -->
-<h2>Get Doctors</h2>
+<h2>Get doctors</h2>
+<p>Get doctor list</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -1260,6 +1423,7 @@ fetch(url, {
 <!-- END_98ee8a4dfd57993014310b0527480cfc -->
 <!-- START_e4606795c4d9f6abaa910fa9a0d719d0 -->
 <h2>Get doctor</h2>
+<p>Get doctor by id</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -1295,6 +1459,7 @@ fetch(url, {
 <!-- END_e4606795c4d9f6abaa910fa9a0d719d0 -->
 <!-- START_7eec77d560fdd163da4a7642a3e97df4 -->
 <h2>Update doctor</h2>
+<p>Update a doctor info, mainly use to set the certificate status of a doctor.</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>

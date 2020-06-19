@@ -18,7 +18,7 @@ class CreateClinicsTable extends Migration
             $table->timestamps();
             $table->string('name', 50)->nullable(false);
             $table->string('city');
-            $table->string('image');
+            $table->string('image')->nullable(true);
             $table->string('position', 50)->nullable(false)->comment('经纬度坐标，用于按地图搜索');
             $table->string('address')->nullable(false)->comment('地址');
             $table->string('intro', 100)->nullable(false);

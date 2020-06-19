@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "05eecf19-1733-4d5a-87d3-0dc84aff758a",
+        "_postman_id": "9f3761d1-9e24-43d3-9633-8a25020eb4eb",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -60,7 +60,7 @@
                     }
                 },
                 {
-                    "name": "Logout",
+                    "name": "Logout\nLog the user out (Invalidate the token).",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -84,7 +84,7 @@
                     }
                 },
                 {
-                    "name": "Refresh token",
+                    "name": "Refresh token\nRefresh a token.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -108,7 +108,7 @@
                     }
                 },
                 {
-                    "name": "Me",
+                    "name": "Me\nGet the authenticated User.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -144,7 +144,26 @@
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/open\/clinic",
-                            "query": []
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "value": "%E7%89%99%E7%A7%91%E5%8C%BB%E9%99%A2",
+                                    "description": "Search clinic by name.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "city",
+                                    "value": "%E5%B9%BF%E5%B7%9E",
+                                    "description": "Filter clinic by city.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "The page number to return.",
+                                    "disabled": false
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -173,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "tempora",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -200,31 +219,7 @@
             "description": "APIs for Doctor",
             "item": [
                 {
-                    "name": "Get certificate",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/doctor\/certificate",
-                            "query": []
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Upload certificate",
+                    "name": "Upload certificate\nForm request for upload a certificate image",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -241,14 +236,14 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"optio\"\n}"
+                            "raw": "{\n    \"certificate\": \"tempore\"\n}"
                         },
                         "description": "",
                         "response": []
                     }
                 },
                 {
-                    "name": "Get clinic",
+                    "name": "Get clinic\nGet clinic info of the user",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -272,7 +267,55 @@
                     }
                 },
                 {
-                    "name": "Get Patients",
+                    "name": "Create clinic\nCreate clinic for this doctor if this doctor doesn't belong to any clinic",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/clinic",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"aut\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Upload clinic image\nUpload clinic image with Form data, return the uploaded url.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/clinic\/image",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"image\": \"illum\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get patients\nGet all patients created by this user.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -303,7 +346,7 @@
                     }
                 },
                 {
-                    "name": "Get Patient",
+                    "name": "Get patient\nGet patient by id.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -335,7 +378,7 @@
                     }
                 },
                 {
-                    "name": "Create patient",
+                    "name": "Create patient\nCreate a patient",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -359,7 +402,7 @@
                     }
                 },
                 {
-                    "name": "Get cases",
+                    "name": "Get cases\nGet all cases created by this user.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -383,7 +426,7 @@
                     }
                 },
                 {
-                    "name": "Get case",
+                    "name": "Get case\nGet case by id",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -415,7 +458,7 @@
                     }
                 },
                 {
-                    "name": "Get orders",
+                    "name": "Get orders\nGet all order related to this user",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -511,7 +554,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "dolor",
+                                    "value": "qui",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -567,7 +610,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "ullam",
+                                    "value": "enim",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -623,7 +666,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quis",
+                                    "value": "deserunt",
                                     "description": "The ID of the order"
                                 }
                             ]
@@ -650,7 +693,7 @@
             "description": "APIs for Professor",
             "item": [
                 {
-                    "name": "Get orders",
+                    "name": "Get orders\nGet order list",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -687,7 +730,7 @@
                     }
                 },
                 {
-                    "name": "Get Doctors",
+                    "name": "Get doctors\nGet doctor list",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -724,7 +767,7 @@
                     }
                 },
                 {
-                    "name": "Get doctor",
+                    "name": "Get doctor\nGet doctor by id",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -756,7 +799,7 @@
                     }
                 },
                 {
-                    "name": "Update doctor",
+                    "name": "Update doctor\nUpdate a doctor info, mainly use to set the certificate status of a doctor.",
                     "request": {
                         "url": {
                             "protocol": "http",

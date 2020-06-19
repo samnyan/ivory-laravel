@@ -43,9 +43,10 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:0'],
     'prefix' => 'doctor'
 ], function () {
-    Route::get('certificate', 'DoctorController@getCertificate');
     Route::post('certificate/upload', 'DoctorController@uploadCertificate');
     Route::get('clinic', 'DoctorController@getClinic');
+    Route::post('clinic', 'DoctorController@createClinic');
+    Route::post('clinic/image', 'DoctorController@uploadClinicImage');
     Route::get('patient', 'DoctorController@getPatients');
     Route::get('patient/{id}', 'DoctorController@getPatient');
     Route::post('patient', 'DoctorController@createPatient');

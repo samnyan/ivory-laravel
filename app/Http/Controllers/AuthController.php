@@ -92,8 +92,8 @@ class AuthController extends Controller
 
     /**
      * Me
-     * @authenticatied
      * Get the authenticated User.
+     * @authenticatied
      *
      * @response {
      * "id": 2,
@@ -125,8 +125,8 @@ class AuthController extends Controller
 
     /**
      * Logout
-     * @authenticated
      * Log the user out (Invalidate the token).
+     * @authenticated
      * @response {
      *  "message": "登出成功"
      * }
@@ -142,8 +142,8 @@ class AuthController extends Controller
 
     /**
      * Refresh token
-     * @authenticated
      * Refresh a token.
+     * @authenticated
      * @response {
      *  "access_token": "",
      *  "token_type": "bearer",
