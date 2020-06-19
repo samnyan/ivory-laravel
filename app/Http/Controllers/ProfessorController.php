@@ -65,10 +65,11 @@ class ProfessorController extends Controller
      */
     public function getOrders(Request $request)
     {
+        $query = Order::query();
         if ($request->has('state')) {
-            return Order::whereState($request->get('state'))->paginate(15);
+            $query->whereState($request->get('state'));
         }
-        return Order::paginate(15);
+        return $query->paginate(15);
     }
 
 
@@ -85,10 +86,14 @@ class ProfessorController extends Controller
      */
     public function getDoctors(Request $request)
     {
+        $query = User::query()->whereType(0);
         if ($request->has('state')) {
-            return User::whereType(0)->where('certificate_checked', $request->get('state'))->paginate(15);
+            $query->where('certificate_checked', $request->get('state'));
         }
-        return User::whereType(0)->paginate(15);
+        if ($request->has('clinicId')) {
+            $query->where('clinic_id', $request->get('clinicId'));
+        }
+        return $query->paginate(15);
     }
 
     /**

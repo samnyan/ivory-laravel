@@ -49,6 +49,7 @@ class DoctorController extends Controller
         $path = $request->file('certificate')->store('certificate');
         $user = auth()->user();
         $user->certificate = $path;
+        $user->certificate_checked = 1;
         $user->save();
         return response()->json(['message' => '上传成功', 'path' => $path]);
     }
@@ -79,7 +80,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Get Patients
+     * Get patients
      * @authenticated
      * @queryParam  page The page number to return. Example: 1
      * Get all patients created by this user.
@@ -115,7 +116,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Get Patient
+     * Get patient
      * @authenticated
      * Get patient by id.
      * @urlParam id required The ID of the case. Example: DLE200617083554
@@ -225,43 +226,43 @@ class DoctorController extends Controller
      * Get case by id
      * @urlParam id required The ID of the case. Example: 1
      * @response {
-    "id": 1,
-    "created_at": null,
-    "updated_at": null,
-    "patient_id": "DLE200617083554",
-    "user_id": 2,
-    "state": 2,
-    "features": "无症状",
-    "files": "{}",
-    "therapy_program": "无需治疗",
-    "orders": [
-    {
-    "id": 1,
-    "created_at": null,
-    "updated_at": null,
-    "clinic_id": 1,
-    "professor_id": 1,
-    "doctor_id": 2,
-    "patient_case_id": 1,
-    "is_first": 1,
-    "state": 0,
-    "product_count": 0,
-    "product_amount_total": null,
-    "order_amount_total": null,
-    "logistics_fee": null,
-    "address_id": 1,
-    "logistics_no": null,
-    "pay_channel": null,
-    "pay_no": null,
-    "delivery_time": null,
-    "pay_time": null,
-    "order_settlement_status": null,
-    "order_settlement_time": null,
-    "fapiao_id": null,
-    "comments": "无备注"
-    }
-    ]
-    }
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗",
+     * "orders": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "clinic_id": 1,
+     * "professor_id": 1,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": 1,
+     * "state": 0,
+     * "product_count": 0,
+     * "product_amount_total": null,
+     * "order_amount_total": null,
+     * "logistics_fee": null,
+     * "address_id": 1,
+     * "logistics_no": null,
+     * "pay_channel": null,
+     * "pay_no": null,
+     * "delivery_time": null,
+     * "pay_time": null,
+     * "order_settlement_status": null,
+     * "order_settlement_time": null,
+     * "fapiao_id": null,
+     * "comments": "无备注"
+     * }
+     * ]
+     * }
      * @param Request $request
      * @param $id integer of case
      * @return PatientCase|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
@@ -318,9 +319,13 @@ class DoctorController extends Controller
      * }
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getOrders()
+    public function getOrders(Request $request)
     {
-        return Order::whereDoctorId(auth()->id())->paginate(15);
+        $query = Order::whereDoctorId(auth()->id());
+        if ($request->has('state')) {
+            $query->whereState($request->get('state'));
+        }
+        return $query->paginate(15);
     }
 
     /**
