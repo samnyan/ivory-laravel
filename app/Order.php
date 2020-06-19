@@ -10,12 +10,12 @@ class Order extends Model
 
     public function doctor()
     {
-        return $this->belongsTo('App\User', 'id', 'doctor_id');
+        return $this->belongsTo('App\User', 'doctor_id', 'id');
     }
 
     public function professor()
     {
-        return $this->belongsTo('App\User', 'id', 'professor_id');
+        return $this->belongsTo('App\User', 'professor_id', 'id');
     }
 
     /**

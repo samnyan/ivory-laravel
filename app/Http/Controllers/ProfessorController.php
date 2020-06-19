@@ -33,20 +33,26 @@ class ProfessorController extends Controller
      * "patient_case_id": 1,
      * "is_first": 1,
      * "state": 0,
-     * "product_count": 0,
-     * "product_amount_total": null,
-     * "order_amount_total": null,
-     * "logistics_fee": null,
+     * "product_count": 3,
+     * "total_price": 1000,
+     * "payment_price": 998,
+     * "shipping_fee": 14,
+     * "pay_method": 1,
+     * "pay_number": "15233958572390",
+     * "pay_time": "2020-06-19 13:26:43",
+     * "tracking_number": "SF000002231231",
      * "address_id": 1,
-     * "logistics_no": null,
-     * "pay_channel": null,
-     * "pay_no": null,
-     * "delivery_time": null,
-     * "pay_time": null,
-     * "order_settlement_status": null,
-     * "order_settlement_time": null,
-     * "fapiao_id": null,
-     * "comments": "无备注"
+     * "shipping_time": "2020-06-19 13:26:43",
+     * "fapiao_id": 1,
+     * "comments": "无备注",
+     * "doctor": {
+     * "id": 2,
+     * "username": "测试医生"
+     * },
+     * "clinic": {
+     * "id": 1,
+     * "name": "达明口腔门诊部"
+     * }
      * }
      * ],
      * "first_page_url": "http://localhost:8000/api/professor/order?page=1",
@@ -69,7 +75,7 @@ class ProfessorController extends Controller
         if ($request->has('state')) {
             $query->whereState($request->get('state'));
         }
-        return $query->paginate(15);
+        return $query->with('doctor:id,username')->with('clinic:id,name')->paginate(15);
     }
 
 
