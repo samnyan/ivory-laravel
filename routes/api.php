@@ -22,6 +22,10 @@ Route::group([
     Route::get('clinic/{id}', 'ClinicController@getClinic');
 });
 
+Route::get('files/{group}/{file}', function ($group, $file) {
+    return Storage::download($group.'/'.$file);
+});
+
 // Api endpoint for authentication
 Route::group([
     'middleware' => 'api',
@@ -57,9 +61,10 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:2'],
     'prefix' => 'professor'
 ], function () {
-    Route::get('/', function () {
-        return response()->json(['message' => 'Hi']);
-    });
+    Route::get('order', 'ProfessorController@getOrders');
+    Route::get('doctor', 'ProfessorController@getDoctors');
+    Route::get('doctor/{id}', 'ProfessorController@getDoctor');
+    Route::post('doctor/{id}', 'ProfessorController@setDoctor');
 });
 
 // Api endpoint for Manager
@@ -74,3 +79,7 @@ Route::group([
     Route::get('/order', 'ManagementController@getOrders');
     Route::get('/order/{id}', 'ManagementController@getOrder');
 });
+
+Route::any('/{any}', function () {
+    return response()->json(['message' => '404 Not Found. 不存在的路径'], 404);
+})->where('any', '.*');
