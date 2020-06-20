@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\PatientCase;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -78,6 +79,90 @@ class ProfessorController extends Controller
         return $query->with('doctor:id,username')->with('clinic:id,name')->paginate(15);
     }
 
+    /**
+     * Create order
+     * Create a order from patient case. This request only require a case id, other information should fill in with update request.
+     * @authenticated
+     * @bodyParam patient_case_id integer required The patient case id. Example: 1
+     * @response {
+     * "clinic_id": 1,
+     * "professor_id": 3,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": false,
+     * "state": 0,
+     * "updated_at": "2020-06-20T02:55:40.000000Z",
+     * "created_at": "2020-06-20T02:55:40.000000Z",
+     * "id": 2
+     * }
+     * @param Request $request
+     * @return Order
+     * @throws \Throwable
+     */
+    public function createOrder(Request $request)
+    {
+        $request->validate([
+            'patient_case_id' => 'required|exists:patient_cases,id', // This is the most important id.
+        ]);
+
+        $patientCase = PatientCase::whereId($request->get('patient_case_id'))->firstOrFail();
+
+        $professor = auth()->user();
+        $doctor = User::whereId($patientCase->user_id)->firstOrFail();
+
+        $order = new Order();
+        $order->clinic_id = $doctor->clinic_id;
+        $order->professor_id = $professor->id;
+        $order->doctor_id = $doctor->id;
+        $order->patient_case_id = $patientCase->id;
+        $order->is_first = !Order::whereDoctorId($doctor->id)->exists();
+        $order->state = 0;
+        $order->saveOrFail();
+
+        return $order;
+    }
+
+    /**
+     * Update order
+     * Update order information
+     * @authenticated
+     * @param Request $request
+     * @param $id
+     * @return Order|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function updateOrder(Request $request, $id)
+    {
+        $order = Order::whereId($id)->firstOrFail();
+        $rule = [
+            'clinicId' => 'numeric',
+            'professor_id' => 'numeric',
+            'doctor_id' => 'numeric',
+            'is_first' => 'boolean',
+            'state' => 'numeric|between:0,7',
+            'product_count' => 'numeric',
+            'total_price' => 'numeric',
+            'payment_price' => 'numeric',
+            'shipping_fee' => 'numeric',
+            'pay_method' => 'numeric',
+            'pay_number' => 'numeric',
+            'pay_time' => 'date',
+            'tracking_number' => 'string|max:30',
+            'address_id' => 'numeric',
+            'shipping_time' => 'date',
+            'fapiao_id' => 'numeric',
+            'comments' => 'string'
+        ];
+        $request->validate($rule);
+
+        foreach ($rule as $k => $v) {
+            if ($request->has($k)) {
+                $order->$k = $request->get($k);
+            }
+        }
+
+        $order->save();
+        return $order;
+    }
 
     // Doctor management
 
@@ -120,7 +205,7 @@ class ProfessorController extends Controller
      * Update a doctor info, mainly use to set the certificate status of a doctor.
      * @authenticated
      * @urlParam id required The id of the doctor. Example: 1
-     * @bodyParam certificateChecked integer The certificate state of the doctor. Example: 0
+     * @bodyParam certificateChecked integer The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过). Example: 0
      * @bodyParam clinicId integer The clinic id of the doctor. Example: 0
      * @param Request $request
      * @param $id

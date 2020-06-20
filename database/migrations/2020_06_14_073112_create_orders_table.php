@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger('clinic_id')->nullable(false)->comment('诊所ID');
-            $table->bigInteger('professor_id')->nullable(false)->comment('创建订单的专家ID');
+            $table->bigInteger('professor_id')->nullable(true)->comment('创建订单的专家ID');
             $table->bigInteger('doctor_id')->nullable(false)->comment('该订单所属病例的医生ID');
             $table->bigInteger('patient_case_id')->nullable(false)->comment('病例ID');
             $table->boolean('is_first')->nullable(false)->default(false)->comment('是否首单');

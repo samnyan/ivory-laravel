@@ -63,6 +63,8 @@ Route::group([
     'prefix' => 'professor'
 ], function () {
     Route::get('order', 'ProfessorController@getOrders');
+    Route::post('order', 'ProfessorController@createOrder');
+    Route::post('order/{id}', 'ProfessorController@updateOrder');
     Route::get('doctor', 'ProfessorController@getDoctors');
     Route::get('doctor/{id}', 'ProfessorController@getDoctor');
     Route::post('doctor/{id}', 'ProfessorController@setDoctor');

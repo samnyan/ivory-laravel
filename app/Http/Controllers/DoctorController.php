@@ -422,26 +422,6 @@ class DoctorController extends Controller
         return Order::whereDoctorId(auth()->id())->whereKey($id)->with('orderDetail')->firstOrFail();
     }
 
-    public function createOrder(Request $request)
-    {
-        $request->validate([
-            'patient_case_id' => 'required',
-            'product_count' => 'required',
-            'address_id' => 'required|exists:addresses,id',
-        ]);
-
-        $user = auth()->user();
-
-        $order = new Order();
-        $order->clinic_id = $user->clinic->id;
-        $order->user_id = $user->id;
-        $order->patient_case_id = $request->get('patient_case_id');
-        $order->is_fist = !Order::whereUserId($user->id)->exists();
-        $order->state = 0;
-        $order->product_count = $request->get('product_count');
-
-    }
-
     function generateRandomChar($length = 2)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
