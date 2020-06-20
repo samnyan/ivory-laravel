@@ -384,7 +384,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/open/clinic/quisquam"
+    "http://localhost/api/open/clinic/a"
 );
 
 fetch(url, {
@@ -453,7 +453,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "architecto"
+    "certificate": "expedita"
 }
 
 fetch(url, {
@@ -537,7 +537,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "iure"
+    "intro": "dolor"
 }
 
 fetch(url, {
@@ -610,7 +610,7 @@ let headers = {
 };
 
 let body = {
-    "image": "unde"
+    "image": "voluptas"
 }
 
 fetch(url, {
@@ -1142,7 +1142,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/user/recusandae"
+    "http://localhost/api/management/user/aspernatur"
 );
 
 fetch(url, {
@@ -1195,7 +1195,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/clinic/non"
+    "http://localhost/api/management/clinic/libero"
 );
 
 fetch(url, {
@@ -1248,7 +1248,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/order/doloribus"
+    "http://localhost/api/management/order/aut"
 );
 
 fetch(url, {
@@ -1375,6 +1375,97 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
+<!-- START_372616d9caed1549bdfa172f4a86bdd2 -->
+<h2>Get order</h2>
+<p>Get order by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/order/1"
+);
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": 1,
+    "state": 0,
+    "product_count": 3,
+    "total_price": 1000,
+    "payment_price": 998,
+    "shipping_fee": 14,
+    "pay_method": 1,
+    "pay_number": "15233958572390",
+    "pay_time": "2020-06-19 13:26:43",
+    "tracking_number": "SF000002231231",
+    "address_id": 1,
+    "shipping_time": "2020-06-19 13:26:43",
+    "fapiao_id": 1,
+    "comments": "无备注",
+    "order_detail": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "order_id": 1,
+            "product_no": "XXSD02",
+            "product_name": "器具",
+            "product_params": "{\"size\": 0}",
+            "product_count": 2,
+            "product_price": 20,
+            "customer_comments": "无备注"
+        }
+    ],
+    "address": {
+        "id": 1,
+        "created_at": null,
+        "updated_at": null,
+        "user_id": 2,
+        "real_name": "某医生",
+        "telephone": "13800000000",
+        "country": 86,
+        "province": 44,
+        "city": 1,
+        "area": 84,
+        "street": "某街道",
+        "zip": 500000,
+        "is_default": 1
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/professor/order/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the order.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_372616d9caed1549bdfa172f4a86bdd2 -->
 <!-- START_b694c3a58cc99b585d2e49af5adf4832 -->
 <h2>Create order</h2>
 <p>Create a order from patient case. This request only require a case id, other information should fill in with update request.</p>
@@ -1449,14 +1540,465 @@ fetch(url, {
     "http://localhost/api/professor/order/1"
 );
 
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 1,
+    "is_first": true,
+    "state": 1,
+    "product_count": 1,
+    "total_price": 1,
+    "payment_price": 1,
+    "shipping_fee": 1,
+    "pay_method": 1,
+    "pay_number": "1",
+    "pay_time": "1",
+    "tracking_number": "1",
+    "address_id": 1,
+    "shipping_time": "1",
+    "fapiao_id": 1,
+    "comments": "1"
+}
+
 fetch(url, {
     method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/professor/order/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the order.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clinic_id</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The clinic id of the order.</td>
+</tr>
+<tr>
+<td><code>professor_id</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The professor user id of who create this order.</td>
+</tr>
+<tr>
+<td><code>doctor_id</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The doctor id of the patient case belong to.</td>
+</tr>
+<tr>
+<td><code>is_first</code></td>
+<td>boolean</td>
+<td>optional</td>
+<td>Is this first order for the doctor.</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The state of the order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货).</td>
+</tr>
+<tr>
+<td><code>product_count</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The total product count of the order.</td>
+</tr>
+<tr>
+<td><code>total_price</code></td>
+<td>float</td>
+<td>optional</td>
+<td>The total price of the order.</td>
+</tr>
+<tr>
+<td><code>payment_price</code></td>
+<td>float</td>
+<td>optional</td>
+<td>The actual payment amount of the order, usually total price - discount + shipping fee.</td>
+</tr>
+<tr>
+<td><code>shipping_fee</code></td>
+<td>float</td>
+<td>optional</td>
+<td>The shipping fee of the order.</td>
+</tr>
+<tr>
+<td><code>pay_method</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The pay method of the order (0=cash, 1=Alipay, 2=WechatPay).</td>
+</tr>
+<tr>
+<td><code>pay_number</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The the payment id of the external payment platform, like alipay.</td>
+</tr>
+<tr>
+<td><code>pay_time</code></td>
+<td>datetime</td>
+<td>optional</td>
+<td>The payment time of the order.</td>
+</tr>
+<tr>
+<td><code>tracking_number</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The tracking number of the package.</td>
+</tr>
+<tr>
+<td><code>address_id</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The address id of the order.</td>
+</tr>
+<tr>
+<td><code>shipping_time</code></td>
+<td>datetime</td>
+<td>optional</td>
+<td>The shipping time of the order.</td>
+</tr>
+<tr>
+<td><code>fapiao_id</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The fapiao id of the order.</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The comments id of the order.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1f68c986366de5895095799e3e54c586 -->
+<!-- START_00536e87cd3a573ad443867b8008dcda -->
+<h2>Create order detail</h2>
+<p>Create an order detail</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/order/1/detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": "1",
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": "15",
+    "product_price": "115.5",
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "order_id": 2,
+    "product_no": "SFX220",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content",
+    "updated_at": "2020-06-20T08:42:49.000000Z",
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "id": 2
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/professor/order/{id}/detail</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the order.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>product_no</code></td>
+<td>required</td>
+<td>optional</td>
+<td>integer The product number of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_name</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The product number of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_params</code></td>
+<td>json_string</td>
+<td>optional</td>
+<td>The product parameters of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_count</code></td>
+<td>required</td>
+<td>optional</td>
+<td>integer The product count of the product.</td>
+</tr>
+<tr>
+<td><code>product_price</code></td>
+<td>required</td>
+<td>optional</td>
+<td>double The product price of the product.</td>
+</tr>
+<tr>
+<td><code>customer_comments</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The comments of the detail.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_00536e87cd3a573ad443867b8008dcda -->
+<!-- START_e8f3e4c4f023956b3614a8bc8bdbe0b5 -->
+<h2>Update order detail</h2>
+<p>Update order detail by order and order detail id.</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/order/1/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": 1,
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": 15,
+    "product_price": 115.5,
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/professor/order/{id}/{detailId}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the order.</td>
+</tr>
+<tr>
+<td><code>detailId</code></td>
+<td>required</td>
+<td>The id of the order detail.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>product_no</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The product number of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_name</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The product number of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_params</code></td>
+<td>json_string</td>
+<td>optional</td>
+<td>The product parameters of the order detail.</td>
+</tr>
+<tr>
+<td><code>product_count</code></td>
+<td>integer</td>
+<td>optional</td>
+<td>The product count of the product.</td>
+</tr>
+<tr>
+<td><code>product_price</code></td>
+<td>float</td>
+<td>optional</td>
+<td>The product price of the product.</td>
+</tr>
+<tr>
+<td><code>customer_comments</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The comments of the detail.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_e8f3e4c4f023956b3614a8bc8bdbe0b5 -->
+<!-- START_f621eea0ab6eadab3b118c491611a143 -->
+<h2>Delete order detail</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/professor/order/1/1"
+);
+
+fetch(url, {
+    method: "DELETE",
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/professor/order/{id}</code></p>
-<!-- END_1f68c986366de5895095799e3e54c586 -->
+<p><code>DELETE api/professor/order/{id}/{detailId}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The id of the order.</td>
+</tr>
+<tr>
+<td><code>detailId</code></td>
+<td>required</td>
+<td>The id of the order detail.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_f621eea0ab6eadab3b118c491611a143 -->
 <!-- START_98ee8a4dfd57993014310b0527480cfc -->
 <h2>Get doctors</h2>
 <p>Get doctor list</p>
@@ -1480,6 +2022,44 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 2,
+            "created_at": null,
+            "updated_at": null,
+            "username": "测试医生",
+            "email": "me@example.com",
+            "type": 0,
+            "sex": 0,
+            "age": 24,
+            "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+            "clinic_id": 1,
+            "mobile": "+8613800000000",
+            "fix_phone_number": "",
+            "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+            "certificate_checked": 2,
+            "wechat": "00000",
+            "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+            "school": "没读大学",
+            "major": "忽悠专业"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/professor\/doctor?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/professor\/doctor?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/professor\/doctor",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/professor/doctor</code></p>
 <h4>Query Parameters</h4>
@@ -1521,6 +2101,40 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 2,
+    "created_at": null,
+    "updated_at": null,
+    "username": "测试医生",
+    "email": "me@example.com",
+    "type": 0,
+    "sex": 0,
+    "age": 24,
+    "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "clinic_id": 1,
+    "mobile": "+8613800000000",
+    "fix_phone_number": "",
+    "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "certificate_checked": 2,
+    "wechat": "00000",
+    "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+    "school": "没读大学",
+    "major": "忽悠专业",
+    "clinic": {
+        "id": 1,
+        "created_at": null,
+        "updated_at": null,
+        "name": "达明口腔门诊部",
+        "city": "广州",
+        "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+        "position": "23.544983,113.595114",
+        "address": "广州市从化区河东北路5号",
+        "intro": "暂无介绍"
+    }
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/professor/doctor/{id}</code></p>
 <h4>URL Parameters</h4>
@@ -1569,6 +2183,29 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 2,
+    "created_at": null,
+    "updated_at": null,
+    "username": "测试医生",
+    "email": "me@example.com",
+    "type": 0,
+    "sex": 0,
+    "age": 24,
+    "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "clinic_id": 1,
+    "mobile": "+8613800000000",
+    "fix_phone_number": "",
+    "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "certificate_checked": 2,
+    "wechat": "00000",
+    "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+    "school": "没读大学",
+    "major": "忽悠专业"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/professor/doctor/{id}</code></p>
 <h4>URL Parameters</h4>

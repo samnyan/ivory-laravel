@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/quisquam"
+    "http://localhost/api/open/clinic/a"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "architecto"
+    "certificate": "expedita"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "iure"
+    "intro": "dolor"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "unde"
+    "image": "voluptas"
 }
 
 fetch(url, {
@@ -1072,7 +1072,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/recusandae"
+    "http://localhost/api/management/user/aspernatur"
 );
 
 
@@ -1131,7 +1131,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/non"
+    "http://localhost/api/management/clinic/libero"
 );
 
 
@@ -1190,7 +1190,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/doloribus"
+    "http://localhost/api/management/order/aut"
 );
 
 
@@ -1308,6 +1308,95 @@ Parameter | Status | Description
 
 <!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
 
+<!-- START_372616d9caed1549bdfa172f4a86bdd2 -->
+## Get order
+Get order by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order/1"
+);
+
+
+fetch(url, {
+    method: "GET",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 1,
+    "created_at": null,
+    "updated_at": null,
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": 1,
+    "state": 0,
+    "product_count": 3,
+    "total_price": 1000,
+    "payment_price": 998,
+    "shipping_fee": 14,
+    "pay_method": 1,
+    "pay_number": "15233958572390",
+    "pay_time": "2020-06-19 13:26:43",
+    "tracking_number": "SF000002231231",
+    "address_id": 1,
+    "shipping_time": "2020-06-19 13:26:43",
+    "fapiao_id": 1,
+    "comments": "无备注",
+    "order_detail": [
+        {
+            "id": 1,
+            "created_at": null,
+            "updated_at": null,
+            "order_id": 1,
+            "product_no": "XXSD02",
+            "product_name": "器具",
+            "product_params": "{\"size\": 0}",
+            "product_count": 2,
+            "product_price": 20,
+            "customer_comments": "无备注"
+        }
+    ],
+    "address": {
+        "id": 1,
+        "created_at": null,
+        "updated_at": null,
+        "user_id": 2,
+        "real_name": "某医生",
+        "telephone": "13800000000",
+        "country": 86,
+        "province": 44,
+        "city": 1,
+        "area": 84,
+        "street": "某街道",
+        "zip": 500000,
+        "is_default": 1
+    }
+}
+```
+
+### HTTP Request
+`GET api/professor/order/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+
+<!-- END_372616d9caed1549bdfa172f4a86bdd2 -->
+
 <!-- START_b694c3a58cc99b585d2e49af5adf4832 -->
 ## Create order
 Create a order from patient case. This request only require a case id, other information should fill in with update request.
@@ -1377,9 +1466,250 @@ const url = new URL(
     "http://localhost/api/professor/order/1"
 );
 
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "clinic_id": 1,
+    "professor_id": 1,
+    "doctor_id": 1,
+    "is_first": true,
+    "state": 1,
+    "product_count": 1,
+    "total_price": 1,
+    "payment_price": 1,
+    "shipping_fee": 1,
+    "pay_method": 1,
+    "pay_number": "1",
+    "pay_time": "1",
+    "tracking_number": "1",
+    "address_id": 1,
+    "shipping_time": "1",
+    "fapiao_id": 1,
+    "comments": "1"
+}
 
 fetch(url, {
     method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}
+```
+
+### HTTP Request
+`POST api/professor/order/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `clinic_id` | integer |  optional  | The clinic id of the order.
+        `professor_id` | integer |  optional  | The professor user id of who create this order.
+        `doctor_id` | integer |  optional  | The doctor id of the patient case belong to.
+        `is_first` | boolean |  optional  | Is this first order for the doctor.
+        `state` | integer |  optional  | The state of the order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货).
+        `product_count` | integer |  optional  | The total product count of the order.
+        `total_price` | float |  optional  | The total price of the order.
+        `payment_price` | float |  optional  | The actual payment amount of the order, usually total price - discount + shipping fee.
+        `shipping_fee` | float |  optional  | The shipping fee of the order.
+        `pay_method` | integer |  optional  | The pay method of the order (0=cash, 1=Alipay, 2=WechatPay).
+        `pay_number` | string |  optional  | The the payment id of the external payment platform, like alipay.
+        `pay_time` | datetime |  optional  | The payment time of the order.
+        `tracking_number` | string |  optional  | The tracking number of the package.
+        `address_id` | integer |  optional  | The address id of the order.
+        `shipping_time` | datetime |  optional  | The shipping time of the order.
+        `fapiao_id` | integer |  optional  | The fapiao id of the order.
+        `comments` | string |  optional  | The comments id of the order.
+    
+<!-- END_1f68c986366de5895095799e3e54c586 -->
+
+<!-- START_00536e87cd3a573ad443867b8008dcda -->
+## Create order detail
+Create an order detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order/1/detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": "1",
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": "15",
+    "product_price": "115.5",
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "order_id": 2,
+    "product_no": "SFX220",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content",
+    "updated_at": "2020-06-20T08:42:49.000000Z",
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "id": 2
+}
+```
+
+### HTTP Request
+`POST api/professor/order/{id}/detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `product_no` | required |  optional  | integer The product number of the order detail.
+        `product_name` | string |  optional  | The product number of the order detail.
+        `product_params` | json_string |  optional  | The product parameters of the order detail.
+        `product_count` | required |  optional  | integer The product count of the product.
+        `product_price` | required |  optional  | double The product price of the product.
+        `customer_comments` | string |  optional  | The comments of the detail.
+    
+<!-- END_00536e87cd3a573ad443867b8008dcda -->
+
+<!-- START_e8f3e4c4f023956b3614a8bc8bdbe0b5 -->
+## Update order detail
+Update order detail by order and order detail id.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order/1/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": 1,
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": 15,
+    "product_price": 115.5,
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}
+```
+
+### HTTP Request
+`POST api/professor/order/{id}/{detailId}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+    `detailId` |  required  | The id of the order detail.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `product_no` | integer |  optional  | The product number of the order detail.
+        `product_name` | string |  optional  | The product number of the order detail.
+        `product_params` | json_string |  optional  | The product parameters of the order detail.
+        `product_count` | integer |  optional  | The product count of the product.
+        `product_price` | float |  optional  | The product price of the product.
+        `customer_comments` | string |  optional  | The comments of the detail.
+    
+<!-- END_e8f3e4c4f023956b3614a8bc8bdbe0b5 -->
+
+<!-- START_f621eea0ab6eadab3b118c491611a143 -->
+## Delete order detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order/1/1"
+);
+
+
+fetch(url, {
+    method: "DELETE",
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -1388,10 +1718,16 @@ fetch(url, {
 
 
 ### HTTP Request
-`POST api/professor/order/{id}`
+`DELETE api/professor/order/{id}/{detailId}`
 
+#### URL Parameters
 
-<!-- END_1f68c986366de5895095799e3e54c586 -->
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+    `detailId` |  required  | The id of the order detail.
+
+<!-- END_f621eea0ab6eadab3b118c491611a143 -->
 
 <!-- START_98ee8a4dfd57993014310b0527480cfc -->
 ## Get doctors
@@ -1421,6 +1757,45 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 2,
+            "created_at": null,
+            "updated_at": null,
+            "username": "测试医生",
+            "email": "me@example.com",
+            "type": 0,
+            "sex": 0,
+            "age": 24,
+            "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+            "clinic_id": 1,
+            "mobile": "+8613800000000",
+            "fix_phone_number": "",
+            "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+            "certificate_checked": 2,
+            "wechat": "00000",
+            "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+            "school": "没读大学",
+            "major": "忽悠专业"
+        }
+    ],
+    "first_page_url": "http:\/\/localhost:8000\/api\/professor\/doctor?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost:8000\/api\/professor\/doctor?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost:8000\/api\/professor\/doctor",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
 
 ### HTTP Request
 `GET api/professor/doctor`
@@ -1455,6 +1830,41 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": null,
+    "updated_at": null,
+    "username": "测试医生",
+    "email": "me@example.com",
+    "type": 0,
+    "sex": 0,
+    "age": 24,
+    "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "clinic_id": 1,
+    "mobile": "+8613800000000",
+    "fix_phone_number": "",
+    "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "certificate_checked": 2,
+    "wechat": "00000",
+    "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+    "school": "没读大学",
+    "major": "忽悠专业",
+    "clinic": {
+        "id": 1,
+        "created_at": null,
+        "updated_at": null,
+        "name": "达明口腔门诊部",
+        "city": "广州",
+        "image": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+        "position": "23.544983,113.595114",
+        "address": "广州市从化区河东北路5号",
+        "intro": "暂无介绍"
+    }
+}
+```
 
 ### HTTP Request
 `GET api/professor/doctor/{id}`
@@ -1499,6 +1909,30 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": null,
+    "updated_at": null,
+    "username": "测试医生",
+    "email": "me@example.com",
+    "type": 0,
+    "sex": 0,
+    "age": 24,
+    "head_portrait": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "clinic_id": 1,
+    "mobile": "+8613800000000",
+    "fix_phone_number": "",
+    "certificate": "http:\/\/pic136.huitu.com\/res\/20200110\/2350458_20200110022605051080_1.jpg",
+    "certificate_checked": 2,
+    "wechat": "00000",
+    "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+    "school": "没读大学",
+    "major": "忽悠专业"
+}
+```
 
 ### HTTP Request
 `POST api/professor/doctor/{id}`

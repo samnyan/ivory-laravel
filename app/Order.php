@@ -40,4 +40,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\PatientCase');
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address', 'id', 'address_id');
+    }
 }
