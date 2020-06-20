@@ -205,8 +205,8 @@ class ProfessorController extends Controller
      * Update a doctor info, mainly use to set the certificate status of a doctor.
      * @authenticated
      * @urlParam id required The id of the doctor. Example: 1
-     * @bodyParam certificateChecked integer The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过). Example: 0
-     * @bodyParam clinicId integer The clinic id of the doctor. Example: 0
+     * @bodyParam certificate_checked integer The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过). Example: 0
+     * @bodyParam clinic_id integer The clinic id of the doctor. Example: 0
      * @param Request $request
      * @param $id
      * @return User|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
@@ -215,14 +215,16 @@ class ProfessorController extends Controller
     public function setDoctor(Request $request, $id)
     {
         $doctor = User::whereType(0)->whereId($id)->firstOrFail();
-        if ($request->has('certificateChecked')) {
-            $request->validate(['certificateChecked' => 'required|numeric|between:0,3']);
-            $doctor->certificate_checked = $request->get('certificateChecked');
-        }
+        $rule = [
+            'certificate_checked' => 'numeric|between:0,3',
+            'clinic_id' => 'numeric|exist:clinic,id'
+        ];
+        $request->validate($rule);
 
-        if ($request->has('clinicId')) {
-            $request->validate(['clinicId' => 'required|numeric']);
-            $doctor->clinic_id = $request->get('clinicId');
+        foreach ($rule as $k => $v) {
+            if ($request->has($k)) {
+                $doctor->$k = $request->get($k);
+            }
         }
 
         $doctor->saveOrFail();
