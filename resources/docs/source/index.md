@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/porro"
+    "http://localhost/api/open/clinic/quisquam"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "et"
+    "certificate": "architecto"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "dolorum"
+    "intro": "iure"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "quo"
+    "image": "unde"
 }
 
 fetch(url, {
@@ -1072,7 +1072,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/non"
+    "http://localhost/api/management/user/recusandae"
 );
 
 
@@ -1131,7 +1131,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/minus"
+    "http://localhost/api/management/clinic/non"
 );
 
 
@@ -1190,7 +1190,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/voluptas"
+    "http://localhost/api/management/order/doloribus"
 );
 
 
@@ -1308,6 +1308,91 @@ Parameter | Status | Description
 
 <!-- END_65a81fc36db06a4b37fd19107fbd7037 -->
 
+<!-- START_b694c3a58cc99b585d2e49af5adf4832 -->
+## Create order
+Create a order from patient case. This request only require a case id, other information should fill in with update request.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "patient_case_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "clinic_id": 1,
+    "professor_id": 3,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": false,
+    "state": 0,
+    "updated_at": "2020-06-20T02:55:40.000000Z",
+    "created_at": "2020-06-20T02:55:40.000000Z",
+    "id": 2
+}
+```
+
+### HTTP Request
+`POST api/professor/order`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `patient_case_id` | integer |  required  | The patient case id.
+    
+<!-- END_b694c3a58cc99b585d2e49af5adf4832 -->
+
+<!-- START_1f68c986366de5895095799e3e54c586 -->
+## Update order
+Update order information
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/order/1"
+);
+
+
+fetch(url, {
+    method: "POST",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/professor/order/{id}`
+
+
+<!-- END_1f68c986366de5895095799e3e54c586 -->
+
 <!-- START_98ee8a4dfd57993014310b0527480cfc -->
 ## Get doctors
 Get doctor list
@@ -1400,8 +1485,8 @@ let headers = {
 };
 
 let body = {
-    "certificateChecked": 0,
-    "clinicId": 0
+    "certificate_checked": 0,
+    "clinic_id": 0
 }
 
 fetch(url, {
@@ -1426,8 +1511,8 @@ Parameter | Status | Description
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `certificateChecked` | integer |  optional  | The certificate state of the doctor.
-        `clinicId` | integer |  optional  | The clinic id of the doctor.
+    `certificate_checked` | integer |  optional  | The certificate state of the doctor (0未上传，1已上传，2已审核通过，3审核不通过).
+        `clinic_id` | integer |  optional  | The clinic id of the doctor.
     
 <!-- END_7eec77d560fdd163da4a7642a3e97df4 -->
 

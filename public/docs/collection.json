@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "49747774-4c10-450f-8c4a-a3b936fc259a",
+        "_postman_id": "c904ae83-ed65-468e-8c63-a7d3f7055800",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -192,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "porro",
+                                    "value": "quisquam",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"et\"\n}"
+                            "raw": "{\n    \"certificate\": \"architecto\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -284,7 +284,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"dolorum\"\n}"
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"iure\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -308,7 +308,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"image\": \"quo\"\n}"
+                            "raw": "{\n    \"image\": \"unde\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -554,7 +554,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "non",
+                                    "value": "recusandae",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -610,7 +610,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "minus",
+                                    "value": "non",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -666,7 +666,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptas",
+                                    "value": "doloribus",
                                     "description": "The ID of the order"
                                 }
                             ]
@@ -715,6 +715,54 @@
                             ]
                         },
                         "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Create order\nCreate a order from patient case. This request only require a case id, other information should fill in with update request.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/order",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"patient_case_id\": 1\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update order\nUpdate order information",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/order\/:id",
+                            "query": []
+                        },
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Accept",
@@ -824,7 +872,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificateChecked\": 0,\n    \"clinicId\": 0\n}"
+                            "raw": "{\n    \"certificate_checked\": 0,\n    \"clinic_id\": 0\n}"
                         },
                         "description": "",
                         "response": []
