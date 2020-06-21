@@ -107,6 +107,38 @@ class ProfessorController extends Controller
      * "shipping_time": "2020-06-19 13:26:43",
      * "fapiao_id": 1,
      * "comments": "无备注",
+     * "clinic": {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "name": "达明口腔门诊部",
+     * "city": "广州",
+     * "image": "http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg",
+     * "position": "23.544983,113.595114",
+     * "address": "广州市从化区河东北路5号",
+     * "intro": "暂无介绍"
+     * },
+     * "doctor": {
+     * "id": 2,
+     * "created_at": null,
+     * "updated_at": null,
+     * "username": "测试医生",
+     * "email": "me@example.com",
+     * "type": 0,
+     * "sex": 0,
+     * "age": 24,
+     * "head_portrait": "http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg",
+     * "clinic_id": 1,
+     * "mobile": "+8613800000000",
+     * "fix_phone_number": "",
+     * "certificate": "http://pic136.huitu.com/res/20200110/2350458_20200110022605051080_1.jpg",
+     * "certificate_checked": 2,
+     * "wechat": "00000",
+     * "intro": "To specify a list of valid parameters your API route accepts, use the @urlParam, @bodyParam and @queryParam annotations.",
+     * "school": "没读大学",
+     * "major": "忽悠专业"
+     * },
+     * "fapiao": null,
      * "order_detail": [
      * {
      * "id": 1,
@@ -142,7 +174,7 @@ class ProfessorController extends Controller
      */
     public function getOrder($id)
     {
-        return Order::whereId($id)->with('orderDetail')->with('address')->firstOrFail();
+        return Order::whereId($id)->with(['clinic', 'doctor', 'fapiao', 'orderDetail', 'address'])->firstOrFail();
     }
 
     /**
