@@ -17,6 +17,141 @@ class ProfessorController extends Controller
 {
 
     /**
+     * Get patient cases
+     * Get patient case list
+     * @authenticated
+     * @queryParam state The state of patient case (-1已取消 0创建 1资料已提交(医生) 2资料需修改 3方案已制定(专家) 4方案待修改 5方案已同意 6已确认 7已下单 8订单已确认 10已存档) . Example: 0
+     * @response {
+     * "current_page": 1,
+     * "data": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗",
+     * "patient": {
+     * "id": "DLE200617083554",
+     * "created_at": null,
+     * "updated_at": null,
+     * "name": "某人",
+     * "age": 10,
+     * "sex": 0,
+     * "comments": "无"
+     * }
+     * }
+     * ],
+     * "first_page_url": "http://localhost:8000/api/professor/patientCase?page=1",
+     * "from": 1,
+     * "last_page": 1,
+     * "last_page_url": "http://localhost:8000/api/professor/patientCase?page=1",
+     * "next_page_url": null,
+     * "path": "http://localhost:8000/api/professor/patientCase",
+     * "per_page": 15,
+     * "prev_page_url": null,
+     * "to": 1,
+     * "total": 1
+     * }
+     * @param Request $request
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getPatientCases(Request $request)
+    {
+        $query = PatientCase::query();
+        if ($request->has('state')) {
+            $query->whereState($request->get('state'));
+        }
+        return $query->with('patient')->paginate(15);
+    }
+
+    /**
+     * Get patient case
+     * Get patient case by id
+     * @authenticated
+     * @urlParam id required The id of the patient case. Example: 1
+     * @response {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗",
+     * "orders": [
+     * {
+     * "id": 1,
+     * "created_at": null,
+     * "updated_at": null,
+     * "clinic_id": 1,
+     * "professor_id": 1,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": 1,
+     * "state": 0,
+     * "product_count": 3,
+     * "total_price": 1000,
+     * "payment_price": 998,
+     * "shipping_fee": 14,
+     * "pay_method": 1,
+     * "pay_number": "15233958572390",
+     * "pay_time": "2020-06-19 13:26:43",
+     * "tracking_number": "SF000002231231",
+     * "address_id": 1,
+     * "shipping_time": "2020-06-19 13:26:43",
+     * "fapiao_id": 1,
+     * "comments": "无备注"
+     * },
+     * {
+     * "id": 2,
+     * "created_at": "2020-06-20T02:55:40.000000Z",
+     * "updated_at": "2020-06-20T02:58:48.000000Z",
+     * "clinic_id": 1,
+     * "professor_id": 3,
+     * "doctor_id": 2,
+     * "patient_case_id": 1,
+     * "is_first": 0,
+     * "state": 0,
+     * "product_count": null,
+     * "total_price": 1.2,
+     * "payment_price": null,
+     * "shipping_fee": null,
+     * "pay_method": null,
+     * "pay_number": null,
+     * "pay_time": null,
+     * "tracking_number": null,
+     * "address_id": null,
+     * "shipping_time": null,
+     * "fapiao_id": null,
+     * "comments": "还行"
+     * }
+     * ],
+     * "patient": {
+     * "id": "DLE200617083554",
+     * "created_at": null,
+     * "updated_at": null,
+     * "name": "某人",
+     * "age": 10,
+     * "sex": 0,
+     * "comments": "无",
+     * "doctor": null
+     * }
+     * }
+     * @param Request $request
+     * @param $id
+     * @return PatientCase|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
+    public function getPatientCase(Request $request, $id)
+    {
+        return PatientCase::whereId($id)->with(['orders', 'patient', 'patient.doctor'])->firstOrFail();
+    }
+
+    /**
      * Get orders
      * Get order list
      * @authenticated

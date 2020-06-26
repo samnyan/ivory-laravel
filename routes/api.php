@@ -50,9 +50,12 @@ Route::group([
     Route::get('patient', 'DoctorController@getPatients');
     Route::get('patient/{id}', 'DoctorController@getPatient');
     Route::post('patient', 'DoctorController@createPatient');
-    Route::put('patient', 'DoctorController@updatePatient');
+    Route::post('patient/{id}', 'DoctorController@updatePatient');
     Route::get('patientCase', 'DoctorController@getCases');
     Route::get('patientCase/{id}', 'DoctorController@getCase');
+    Route::post('patientCase', 'DoctorController@createCase');
+    Route::post('patientCase/{id}', 'DoctorController@updateCase');
+    Route::post('patientCaseFile', 'DoctorController@uploadCaseFile');
     Route::get('order', 'DoctorController@getOrders');
     Route::get('order/{id}', 'DoctorController@getOrder');
 });
@@ -62,6 +65,8 @@ Route::group([
     'middleware' => ['api', 'auth:api', 'type:2'],
     'prefix' => 'professor'
 ], function () {
+    Route::get('patientCase', 'ProfessorController@getPatientCases');
+    Route::get('patientCase/{id}', 'ProfessorController@getPatientCase');
     Route::get('order', 'ProfessorController@getOrders');
     Route::get('order/{id}', 'ProfessorController@getOrder');
     Route::post('order', 'ProfessorController@createOrder');

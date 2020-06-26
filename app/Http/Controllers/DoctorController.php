@@ -265,7 +265,7 @@ class DoctorController extends Controller
      */
     public function getCases()
     {
-        return PatientCase::whereUserId(auth()->id())->paginate(15);
+        return PatientCase::whereUserId(auth()->id())->with('patient')->paginate(15);
     }
 
     /**
@@ -317,7 +317,82 @@ class DoctorController extends Controller
      */
     public function getCase(Request $request, $id)
     {
-        return PatientCase::whereId($id)->whereUserId(auth()->id())->with('orders')->firstOrFail();
+        return PatientCase::whereId($id)->whereUserId(auth()->id())->with(['patient', 'orders'])->firstOrFail();
+    }
+
+    /**
+     * Create patient case
+     * Create a patient case base on a patient
+     * @authencated
+     * @bodyParam patient_id string required The patient id. Example: PAT0315091509
+     * @bodyParam features string required The patient case detail. Example: Some content.
+     * @param Request $request
+     * @return bool
+     * @throws \Throwable
+     */
+    public function createCase(Request $request) {
+        $request->validate([
+            'patient_id' => 'required|exists:patient,id', // Create a case base on patient
+            'features' => 'required'
+        ]);
+
+        $doctor = auth()->user();
+
+        $patient = Patient::whereId($request->get('patient_id'))->firstOrFail();
+
+        $case = new PatientCase();
+        $case->patient_id = $patient->id;
+        $case->user_id = $doctor->id;
+        $case->state = 0;
+        $case->features = $request->get('features');
+
+        return $case->saveOrFail();
+    }
+
+    /**
+     * Update patient case
+     * Update the patient case detail
+     * @authenticated
+     * @urlParam id required The ID of the case. Example: 1
+     * @bodyParam state integer The state of this patient case. Example: 1.
+     * @bodyParam features string The patient case detail. Example: Some content.
+     * @bodyParam files json The required files (path) related to this patient case, in json format. Example: {photo1: '/case/1234.jpg'}.
+     * @param Request $request
+     * @param $id
+     * @return bool
+     * @throws \Throwable
+     */
+    public function updateCase(Request $request, $id) {
+        $rule = [
+            'state' => 'numeric',
+            'features' => 'string',
+            'files' => 'json'
+        ];
+
+        $request->validate($rule);
+        $case = PatientCase::whereUserId(auth()->id())->whereId($id)->firstOrFail();
+
+        foreach ($rule as $k => $v) {
+            if ($request->has($k)) {
+                $case->$k = $request->get($k);
+            }
+        }
+
+        return $case->saveOrFail();
+    }
+
+    /**
+     * Upload case files
+     * Form request for upload a any files relate to a patient case (Such as images)
+     * @authenticated
+     * @bodyParam file binary required The file of certificate image.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadCaseFile(Request $request)
+    {
+        $path = $request->file('file')->store('patientCase');
+        return response()->json(['message' => '上传成功', 'path' => $path]);
     }
 
     /**

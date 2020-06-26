@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "2d1897bf-25f8-49a1-9e14-0ea2d0f8a6e1",
+        "_postman_id": "588337bb-7dca-41b2-93aa-2a314f169ffb",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -192,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "in",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"esse\"\n}"
+                            "raw": "{\n    \"certificate\": \"adipisci\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -284,7 +284,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"esse\"\n}"
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"iure\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -308,7 +308,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"image\": \"est\"\n}"
+                            "raw": "{\n    \"image\": \"hic\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -458,6 +458,86 @@
                     }
                 },
                 {
+                    "name": "Create patient case\nCreate a patient case base on a patient",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patientCase",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"patient_id\": \"PAT0315091509\",\n    \"features\": \"Some content.\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update patient case\nUpdate the patient case detail",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patientCase\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the case."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"state\": 1,\n    \"features\": \"Some content.\",\n    \"files\": \"{photo1: '\\\/case\\\/1234.jpg'}.\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Upload case files\nForm request for upload a any files relate to a patient case (Such as images)",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patientCaseFile",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file\": \"dolores\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "Get orders\nGet all order related to this user",
                     "request": {
                         "url": {
@@ -554,7 +634,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eius",
+                                    "value": "at",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -610,7 +690,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatibus",
+                                    "value": "rem",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -666,7 +746,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "provident",
+                                    "value": "sunt",
                                     "description": "The ID of the order"
                                 }
                             ]
@@ -692,6 +772,69 @@
             "name": "Professor",
             "description": "APIs for Professor",
             "item": [
+                {
+                    "name": "Get patient cases\nGet patient case list",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/patientCase",
+                            "query": [
+                                {
+                                    "key": "state",
+                                    "value": "0",
+                                    "description": "The state of patient case (-1\u5df2\u53d6\u6d88 0\u521b\u5efa 1\u8d44\u6599\u5df2\u63d0\u4ea4(\u533b\u751f) 2\u8d44\u6599\u9700\u4fee\u6539 3\u65b9\u6848\u5df2\u5236\u5b9a(\u4e13\u5bb6) 4\u65b9\u6848\u5f85\u4fee\u6539 5\u65b9\u6848\u5df2\u540c\u610f 6\u5df2\u786e\u8ba4 7\u5df2\u4e0b\u5355 8\u8ba2\u5355\u5df2\u786e\u8ba4 10\u5df2\u5b58\u6863) .",
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get patient case\nGet patient case by id",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/patientCase\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the patient case."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
                 {
                     "name": "Get orders\nGet order list",
                     "request": {
