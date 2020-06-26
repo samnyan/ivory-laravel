@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/in"
+    "http://localhost/api/open/clinic/qui"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "adipisci"
+    "certificate": "ullam"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "iure"
+    "intro": "corporis"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "hic"
+    "image": "laborum"
 }
 
 fetch(url, {
@@ -738,6 +738,19 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "id": "0",
+    "name": "某人",
+    "age": 10,
+    "sex": 0,
+    "comments": "0",
+    "updated_at": "2020-06-26T13:43:15.000000Z",
+    "created_at": "2020-06-26T13:43:15.000000Z"
+}
+```
 
 ### HTTP Request
 `POST api/doctor/patient`
@@ -753,8 +766,8 @@ Parameter | Type | Status | Description
 <!-- END_23bc824a9562eb9873b6ae7e5d042322 -->
 
 <!-- START_555c845d7e367546dd34081c14d0a491 -->
-## Get cases
-Get all cases created by this user.
+## Get patient cases
+Get all patient cases created by this user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -763,6 +776,13 @@ Get all cases created by this user.
 const url = new URL(
     "http://localhost/api/doctor/patientCase"
 );
+
+let params = {
+    "page": "1",
+    "state": "0",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
 
 
 fetch(url, {
@@ -788,7 +808,16 @@ fetch(url, {
             "state": 2,
             "features": "无症状",
             "files": "{}",
-            "therapy_program": "无需治疗"
+            "therapy_program": "无需治疗",
+            "patient": {
+                "id": "DLE200617083554",
+                "created_at": null,
+                "updated_at": null,
+                "name": "某人",
+                "age": 10,
+                "sex": 0,
+                "comments": "无"
+            }
         }
     ],
     "first_page_url": "http:\/\/localhost:8000\/api\/doctor\/patientCase?page=1",
@@ -807,12 +836,18 @@ fetch(url, {
 ### HTTP Request
 `GET api/doctor/patientCase`
 
+#### Query Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -----------
+    `page` |  optional  | Page of the request.
+    `state` |  optional  | The state of case (-1已取消 0创建 1资料已提交(医生) 2资料需修改 3方案已制定(专家) 4方案待修改 5方案已同意 6已确认 7已下单 8订单已确认 10已存档) .
 
 <!-- END_555c845d7e367546dd34081c14d0a491 -->
 
 <!-- START_4bed066ce46b16ab75eb1801478c9174 -->
-## Get case
-Get case by id
+## Get patient case
+Get patient case by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -844,6 +879,15 @@ fetch(url, {
     "features": "无症状",
     "files": "{}",
     "therapy_program": "无需治疗",
+    "patient": {
+        "id": "DLE200617083554",
+        "created_at": null,
+        "updated_at": null,
+        "name": "某人",
+        "age": 10,
+        "sex": 0,
+        "comments": "无"
+    },
     "orders": [
         {
             "id": 1,
@@ -855,20 +899,41 @@ fetch(url, {
             "patient_case_id": 1,
             "is_first": 1,
             "state": 0,
-            "product_count": 0,
-            "product_amount_total": null,
-            "order_amount_total": null,
-            "logistics_fee": null,
+            "product_count": 3,
+            "total_price": 1000,
+            "payment_price": 998,
+            "shipping_fee": 14,
+            "pay_method": 1,
+            "pay_number": "15233958572390",
+            "pay_time": "2020-06-19 13:26:43",
+            "tracking_number": "SF000002231231",
             "address_id": 1,
-            "logistics_no": null,
-            "pay_channel": null,
-            "pay_no": null,
-            "delivery_time": null,
-            "pay_time": null,
-            "order_settlement_status": null,
-            "order_settlement_time": null,
-            "fapiao_id": null,
+            "shipping_time": "2020-06-19 13:26:43",
+            "fapiao_id": 1,
             "comments": "无备注"
+        },
+        {
+            "id": 2,
+            "created_at": "2020-06-20T02:55:40.000000Z",
+            "updated_at": "2020-06-20T02:58:48.000000Z",
+            "clinic_id": 1,
+            "professor_id": 3,
+            "doctor_id": 2,
+            "patient_case_id": 1,
+            "is_first": 0,
+            "state": 0,
+            "product_count": null,
+            "total_price": 1.2,
+            "payment_price": null,
+            "shipping_fee": null,
+            "pay_method": null,
+            "pay_number": null,
+            "pay_time": null,
+            "tracking_number": null,
+            "address_id": null,
+            "shipping_time": null,
+            "fapiao_id": null,
+            "comments": "还行"
         }
     ]
 }
@@ -916,6 +981,19 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "patient_id": "DLE200617083554",
+    "user_id": 2,
+    "state": 0,
+    "features": "Something",
+    "updated_at": "2020-06-26T13:35:35.000000Z",
+    "created_at": "2020-06-26T13:35:35.000000Z",
+    "id": 3
+}
+```
 
 ### HTTP Request
 `POST api/doctor/patientCase`
@@ -961,6 +1039,21 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "id": 3,
+    "created_at": "2020-06-26T13:35:35.000000Z",
+    "updated_at": "2020-06-26T13:35:35.000000Z",
+    "patient_id": "DLE200617083554",
+    "user_id": 2,
+    "state": 0,
+    "features": "Something",
+    "files": null,
+    "therapy_program": null
+}
+```
 
 ### HTTP Request
 `POST api/doctor/patientCase/{id}`
@@ -997,7 +1090,7 @@ let headers = {
 };
 
 let body = {
-    "file": "dolores"
+    "file": "et"
 }
 
 fetch(url, {
@@ -1010,6 +1103,14 @@ fetch(url, {
 ```
 
 
+> Example response (200):
+
+```json
+{
+    "message": "上传成功",
+    "path": "patientCase\/DRUCjs92FfgYEXY0DFTa5OUSrivUADxqB4sxPopS.jpeg"
+}
+```
 
 ### HTTP Request
 `POST api/doctor/patientCaseFile`
@@ -1035,6 +1136,7 @@ const url = new URL(
 
 let params = {
     "page": "1",
+    "state": "0",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -1099,11 +1201,13 @@ fetch(url, {
 Parameter | Status | Description
 --------- | ------- | ------- | -----------
     `page` |  optional  | Page of the request.
+    `state` |  optional  | The state of order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货) .
 
 <!-- END_ff11b8c6f70c4d81bf372cc58c5ba000 -->
 
 <!-- START_c90b2590e8f65d2cdb6d50d1ea4a1c33 -->
-## Get order by id
+## Get order
+Get order by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -1170,6 +1274,314 @@ fetch(url, {
 
 <!-- END_c90b2590e8f65d2cdb6d50d1ea4a1c33 -->
 
+<!-- START_b62b8442e542b07a5b0572b31004646e -->
+## Create order
+Create a order from patient case. This request only require a case id, other information should fill in with update request.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "patient_case_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "clinic_id": 1,
+    "professor_id": 3,
+    "doctor_id": 2,
+    "patient_case_id": 1,
+    "is_first": false,
+    "state": 0,
+    "updated_at": "2020-06-20T02:55:40.000000Z",
+    "created_at": "2020-06-20T02:55:40.000000Z",
+    "id": 2
+}
+```
+
+### HTTP Request
+`POST api/doctor/order`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `patient_case_id` | integer |  required  | The patient case id.
+    
+<!-- END_b62b8442e542b07a5b0572b31004646e -->
+
+<!-- START_5142455a44cce77760a93372b3ce303d -->
+## Update order
+Update order information
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "state": 1,
+    "product_count": 1,
+    "total_price": 1,
+    "address_id": 1,
+    "comments": "1"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}
+```
+
+### HTTP Request
+`POST api/doctor/order/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `state` | integer |  optional  | The state of the order (-1=取消交易,0=未付款,1=已付款,2=已发货,3=已签收,4=退货申请,5=退货中,6=已退货).
+        `product_count` | integer |  optional  | The total product count of the order.
+        `total_price` | float |  optional  | The total price of the order.
+        `address_id` | integer |  optional  | The address id of the order.
+        `comments` | string |  optional  | The comments id of the order.
+    
+<!-- END_5142455a44cce77760a93372b3ce303d -->
+
+<!-- START_308e927be66605a93eaa3ce50573b194 -->
+## Create order detail
+Create an order detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order/1/detail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": "1",
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": "15",
+    "product_price": "115.5",
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "order_id": 2,
+    "product_no": "SFX220",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content",
+    "updated_at": "2020-06-20T08:42:49.000000Z",
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "id": 2
+}
+```
+
+### HTTP Request
+`POST api/doctor/order/{id}/detail`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `product_no` | required |  optional  | integer The product number of the order detail.
+        `product_name` | string |  optional  | The product number of the order detail.
+        `product_params` | json_string |  optional  | The product parameters of the order detail.
+        `product_count` | required |  optional  | integer The product count of the product.
+        `product_price` | required |  optional  | double The product price of the product.
+        `customer_comments` | string |  optional  | The comments of the detail.
+    
+<!-- END_308e927be66605a93eaa3ce50573b194 -->
+
+<!-- START_2eac2bc9fcb58e314b4e0b795facd4d2 -->
+## Update order detail
+Update order detail by order and order detail id.
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order/1/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "product_no": 1,
+    "product_name": "\"\"",
+    "product_params": "{ some: data }",
+    "product_count": 15,
+    "product_price": 115.5,
+    "customer_comments": "\"\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": 2,
+    "created_at": "2020-06-20T08:42:49.000000Z",
+    "updated_at": "2020-06-20T08:43:32.000000Z",
+    "order_id": 2,
+    "product_no": "SFX221",
+    "product_name": "Some Product",
+    "product_params": "{\"size\": \"100cm\"}",
+    "product_count": 3,
+    "product_price": 155.2,
+    "customer_comments": "Comments content"
+}
+```
+
+### HTTP Request
+`POST api/doctor/order/{id}/{detailId}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+    `detailId` |  required  | The id of the order detail.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `product_no` | integer |  optional  | The product number of the order detail.
+        `product_name` | string |  optional  | The product number of the order detail.
+        `product_params` | json_string |  optional  | The product parameters of the order detail.
+        `product_count` | integer |  optional  | The product count of the product.
+        `product_price` | float |  optional  | The product price of the product.
+        `customer_comments` | string |  optional  | The comments of the detail.
+    
+<!-- END_2eac2bc9fcb58e314b4e0b795facd4d2 -->
+
+<!-- START_f57b26cdcda986d1b982689130a8dfe9 -->
+## Delete order detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/order/1/1"
+);
+
+
+fetch(url, {
+    method: "DELETE",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/doctor/order/{id}/{detailId}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The id of the order.
+    `detailId` |  required  | The id of the order detail.
+
+<!-- END_f57b26cdcda986d1b982689130a8dfe9 -->
+
 #Management
 
 APIs for Management
@@ -1208,7 +1620,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/at"
+    "http://localhost/api/management/user/consequatur"
 );
 
 
@@ -1267,7 +1679,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/rem"
+    "http://localhost/api/management/clinic/eveniet"
 );
 
 
@@ -1326,7 +1738,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/sunt"
+    "http://localhost/api/management/order/aliquid"
 );
 
 
@@ -1536,6 +1948,55 @@ Parameter | Status | Description
     `id` |  required  | The id of the patient case.
 
 <!-- END_40cb20648d9236b56b040e5afa842f40 -->
+
+<!-- START_8db6b185b3a837b761ec1a62a74b5117 -->
+## Update patient case
+Update the patient case detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/professor/patientCase/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "state": 1,
+    "therapy_program": "Some detailed information."
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST api/professor/patientCase/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the case.
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `state` | integer |  optional  | The state of this patient case.
+        `therapy_program` | string |  optional  | The therapy program for this case.
+    
+<!-- END_8db6b185b3a837b761ec1a62a74b5117 -->
 
 <!-- START_65a81fc36db06a4b37fd19107fbd7037 -->
 ## Get orders
@@ -1748,63 +2209,6 @@ Parameter | Status | Description
     `id` |  required  | The id of the order.
 
 <!-- END_372616d9caed1549bdfa172f4a86bdd2 -->
-
-<!-- START_b694c3a58cc99b585d2e49af5adf4832 -->
-## Create order
-Create a order from patient case. This request only require a case id, other information should fill in with update request.
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```javascript
-const url = new URL(
-    "http://localhost/api/professor/order"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "patient_case_id": 1
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-> Example response (200):
-
-```json
-{
-    "clinic_id": 1,
-    "professor_id": 3,
-    "doctor_id": 2,
-    "patient_case_id": 1,
-    "is_first": false,
-    "state": 0,
-    "updated_at": "2020-06-20T02:55:40.000000Z",
-    "created_at": "2020-06-20T02:55:40.000000Z",
-    "id": 2
-}
-```
-
-### HTTP Request
-`POST api/professor/order`
-
-#### Body Parameters
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    `patient_case_id` | integer |  required  | The patient case id.
-    
-<!-- END_b694c3a58cc99b585d2e49af5adf4832 -->
 
 <!-- START_1f68c986366de5895095799e3e54c586 -->
 ## Update order

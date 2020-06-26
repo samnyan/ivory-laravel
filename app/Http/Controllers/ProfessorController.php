@@ -152,6 +152,36 @@ class ProfessorController extends Controller
     }
 
     /**
+     * Update patient case
+     * Update the patient case detail
+     * @authenticated
+     * @urlParam id required The ID of the case. Example: 1
+     * @bodyParam state integer The state of this patient case. Example: 1.
+     * @bodyParam therapy_program string The therapy program for this case. Example: Some detailed information.
+     * @param Request $request
+     * @param $id
+     * @return bool
+     * @throws \Throwable
+     */
+    public function updatePatientCase(Request $request, $id) {
+        $rule = [
+            'state' => 'numeric',
+            'therapy_program' => 'string',
+        ];
+
+        $request->validate($rule);
+        $case = PatientCase::whereId($id)->firstOrFail();
+
+        foreach ($rule as $k => $v) {
+            if ($request->has($k)) {
+                $case->$k = $request->get($k);
+            }
+        }
+
+        return $case->saveOrFail();
+    }
+
+    /**
      * Get orders
      * Get order list
      * @authenticated
@@ -310,49 +340,6 @@ class ProfessorController extends Controller
     public function getOrder($id)
     {
         return Order::whereId($id)->with(['clinic', 'doctor', 'fapiao', 'orderDetail', 'address'])->firstOrFail();
-    }
-
-    /**
-     * Create order
-     * Create a order from patient case. This request only require a case id, other information should fill in with update request.
-     * @authenticated
-     * @bodyParam patient_case_id integer required The patient case id. Example: 1
-     * @response {
-     * "clinic_id": 1,
-     * "professor_id": 3,
-     * "doctor_id": 2,
-     * "patient_case_id": 1,
-     * "is_first": false,
-     * "state": 0,
-     * "updated_at": "2020-06-20T02:55:40.000000Z",
-     * "created_at": "2020-06-20T02:55:40.000000Z",
-     * "id": 2
-     * }
-     * @param Request $request
-     * @return Order
-     * @throws \Throwable
-     */
-    public function createOrder(Request $request)
-    {
-        $request->validate([
-            'patient_case_id' => 'required|exists:patient_cases,id', // This is the most important id.
-        ]);
-
-        $patientCase = PatientCase::whereId($request->get('patient_case_id'))->firstOrFail();
-
-        $professor = auth()->user();
-        $doctor = User::whereId($patientCase->user_id)->firstOrFail();
-
-        $order = new Order();
-        $order->clinic_id = $doctor->clinic_id;
-        $order->professor_id = $professor->id;
-        $order->doctor_id = $doctor->id;
-        $order->patient_case_id = $patientCase->id;
-        $order->is_first = !Order::whereDoctorId($doctor->id)->exists();
-        $order->state = 0;
-        $order->saveOrFail();
-
-        return $order;
     }
 
     /**

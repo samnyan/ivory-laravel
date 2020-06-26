@@ -58,6 +58,11 @@ Route::group([
     Route::post('patientCaseFile', 'DoctorController@uploadCaseFile');
     Route::get('order', 'DoctorController@getOrders');
     Route::get('order/{id}', 'DoctorController@getOrder');
+    Route::post('order', 'DoctorController@createOrder');
+    Route::post('order/{id}', 'DoctorController@updateOrder');
+    Route::post('order/{id}/detail', 'DoctorController@createOrderDetail');
+    Route::post('order/{id}/{detailId}', 'DoctorController@updateOrderDetail');
+    Route::delete('order/{id}/{detailId}', 'DoctorController@deleteOrderDetail');
 });
 
 // Api endpoint for Professor
@@ -67,9 +72,9 @@ Route::group([
 ], function () {
     Route::get('patientCase', 'ProfessorController@getPatientCases');
     Route::get('patientCase/{id}', 'ProfessorController@getPatientCase');
+    Route::post('patientCase/{id}', 'ProfessorController@updatePatientCase');
     Route::get('order', 'ProfessorController@getOrders');
     Route::get('order/{id}', 'ProfessorController@getOrder');
-    Route::post('order', 'ProfessorController@createOrder');
     Route::post('order/{id}', 'ProfessorController@updateOrder');
     Route::post('order/{id}/detail', 'ProfessorController@createOrderDetail');
     Route::post('order/{id}/{detailId}', 'ProfessorController@updateOrderDetail');

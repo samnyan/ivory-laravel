@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "588337bb-7dca-41b2-93aa-2a314f169ffb",
+        "_postman_id": "00935780-a0bc-488a-9255-3fe4979622fe",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -192,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "in",
+                                    "value": "qui",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"adipisci\"\n}"
+                            "raw": "{\n    \"certificate\": \"ullam\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -284,7 +284,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"iure\"\n}"
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"corporis\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -308,7 +308,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"image\": \"hic\"\n}"
+                            "raw": "{\n    \"image\": \"laborum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -402,13 +402,26 @@
                     }
                 },
                 {
-                    "name": "Get cases\nGet all cases created by this user.",
+                    "name": "Get patient cases\nGet all patient cases created by this user.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "localhost",
                             "path": "api\/doctor\/patientCase",
-                            "query": []
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Page of the request.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "state",
+                                    "value": "0",
+                                    "description": "The state of case (-1\u5df2\u53d6\u6d88 0\u521b\u5efa 1\u8d44\u6599\u5df2\u63d0\u4ea4(\u533b\u751f) 2\u8d44\u6599\u9700\u4fee\u6539 3\u65b9\u6848\u5df2\u5236\u5b9a(\u4e13\u5bb6) 4\u65b9\u6848\u5f85\u4fee\u6539 5\u65b9\u6848\u5df2\u540c\u610f 6\u5df2\u786e\u8ba4 7\u5df2\u4e0b\u5355 8\u8ba2\u5355\u5df2\u786e\u8ba4 10\u5df2\u5b58\u6863) .",
+                                    "disabled": true
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -426,7 +439,7 @@
                     }
                 },
                 {
-                    "name": "Get case\nGet case by id",
+                    "name": "Get patient case\nGet patient case by id",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -531,7 +544,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"dolores\"\n}"
+                            "raw": "{\n    \"file\": \"et\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -550,6 +563,12 @@
                                     "value": "1",
                                     "description": "Page of the request.",
                                     "disabled": false
+                                },
+                                {
+                                    "key": "state",
+                                    "value": "0",
+                                    "description": "The state of order (-1=\u53d6\u6d88\u4ea4\u6613,0=\u672a\u4ed8\u6b3e,1=\u5df2\u4ed8\u6b3e,2=\u5df2\u53d1\u8d27,3=\u5df2\u7b7e\u6536,4=\u9000\u8d27\u7533\u8bf7,5=\u9000\u8d27\u4e2d,6=\u5df2\u9000\u8d27) .",
+                                    "disabled": true
                                 }
                             ]
                         },
@@ -569,7 +588,7 @@
                     }
                 },
                 {
-                    "name": "Get order by id",
+                    "name": "Get order\nGet order by id",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -578,6 +597,170 @@
                             "query": []
                         },
                         "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Create order\nCreate a order from patient case. This request only require a case id, other information should fill in with update request.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"patient_case_id\": 1\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update order\nUpdate order information",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the order."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"state\": 1,\n    \"product_count\": 1,\n    \"total_price\": 1,\n    \"address_id\": 1,\n    \"comments\": \"1\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Create order detail\nCreate an order detail",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order\/:id\/detail",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the order."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_no\": \"1\",\n    \"product_name\": \"\\\"\\\"\",\n    \"product_params\": \"{ some: data }\",\n    \"product_count\": \"15\",\n    \"product_price\": \"115.5\",\n    \"customer_comments\": \"\\\"\\\"\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update order detail\nUpdate order detail by order and order detail id.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order\/:id\/:detailId",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the order."
+                                },
+                                {
+                                    "id": "detailId",
+                                    "key": "detailId",
+                                    "value": "1",
+                                    "description": "The id of the order detail."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_no\": 1,\n    \"product_name\": \"\\\"\\\"\",\n    \"product_params\": \"{ some: data }\",\n    \"product_count\": 15,\n    \"product_price\": 115.5,\n    \"customer_comments\": \"\\\"\\\"\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Delete order detail",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/order\/:id\/:detailId",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The id of the order."
+                                },
+                                {
+                                    "id": "detailId",
+                                    "key": "detailId",
+                                    "value": "1",
+                                    "description": "The id of the order detail."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
                         "header": [
                             {
                                 "key": "Accept",
@@ -634,7 +817,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "at",
+                                    "value": "consequatur",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -690,7 +873,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "rem",
+                                    "value": "eveniet",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -746,7 +929,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sunt",
+                                    "value": "aliquid",
                                     "description": "The ID of the order"
                                 }
                             ]
@@ -836,6 +1019,38 @@
                     }
                 },
                 {
+                    "name": "Update patient case\nUpdate the patient case detail",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/professor\/patientCase\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the case."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"state\": 1,\n    \"therapy_program\": \"Some detailed information.\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "Get orders\nGet order list",
                     "request": {
                         "url": {
@@ -899,30 +1114,6 @@
                         "body": {
                             "mode": "raw",
                             "raw": "[]"
-                        },
-                        "description": "",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Create order\nCreate a order from patient case. This request only require a case id, other information should fill in with update request.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost",
-                            "path": "api\/professor\/order",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"patient_case_id\": 1\n}"
                         },
                         "description": "",
                         "response": []
