@@ -522,6 +522,7 @@ class DoctorController extends Controller
      * "to": 1,
      * "total": 1
      * }
+     * @param Request $request
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getOrders(Request $request)
