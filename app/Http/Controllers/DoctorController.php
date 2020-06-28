@@ -284,6 +284,26 @@ class DoctorController extends Controller
     }
 
     /**
+     * Upload patient photo
+     * Form request for upload patient photo, this will also update photo_url filed
+     * @authenticated
+     * @bodyParam file binary required The file of patient photo.
+     * @response {
+     * "message": "照片更新成功",
+     * "path": "patientPhoto/DRUCjs92FfgYEXY0DFTa5OUSrivUADxqB4sxPopS.jpeg"
+     * }
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadPatientPhoto(Request $request, $id)
+    {
+        $patient = Patient::whereUserId(auth()->id())->whereId($id)->firstOrFail();
+        $path = $request->file('photo')->store('patientPhoto');
+        $patient->photo_url = $path;
+        return response()->json(['message' => '照片更新成功', 'path' => $path]);
+    }
+
+    /**
      * Get patient cases
      * Get all patient cases created by this user.
      * @authenticated
@@ -502,10 +522,25 @@ class DoctorController extends Controller
     }
 
     /**
+     * Delete patient case
+     * Delete patient case by id
+     * @authenticated
+     * @urlParam id required The ID of the case. Example: 1
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function deleteCase($id) {
+        $case = PatientCase::whereUserId(auth()->id())->whereId($id)->firstOrFail();
+        $case->delete();
+
+        return response()->json(['message' => '删除成功']);
+    }
+    /**
      * Upload case files
      * Form request for upload a any files relate to a patient case (Such as images)
      * @authenticated
-     * @bodyParam file binary required The file of certificate image.
+     * @bodyParam file binary required The file of patient case image.
      * @response {
      * "message": "上传成功",
      * "path": "patientCase/DRUCjs92FfgYEXY0DFTa5OUSrivUADxqB4sxPopS.jpeg"

@@ -51,10 +51,12 @@ Route::group([
     Route::get('patient/{id}', 'DoctorController@getPatient');
     Route::post('patient', 'DoctorController@createPatient');
     Route::post('patient/{id}', 'DoctorController@updatePatient');
+    Route::post('patient/{id}/photo', 'DoctorController@uploadPatientPhoto');
     Route::get('patientCase', 'DoctorController@getCases');
     Route::get('patientCase/{id}', 'DoctorController@getCase');
     Route::post('patientCase', 'DoctorController@createCase');
     Route::post('patientCase/{id}', 'DoctorController@updateCase');
+    Route::delete('patientCase/{id}', 'DoctorController@deleteCase');
     Route::post('patientCaseFile', 'DoctorController@uploadCaseFile');
     Route::get('order', 'DoctorController@getOrders');
     Route::get('order/{id}', 'DoctorController@getOrder');

@@ -12,6 +12,8 @@ class TestSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([[
+            'created_at' => '2020-06-26 13:33:58',
+            'updated_at' => '2020-06-26 13:33:58',
             'id' => 1,
             'username' => 'Administrator',
             'pwd' => Hash::make('12345678'),
@@ -20,6 +22,8 @@ class TestSeeder extends Seeder
             'sex' => 0,
             'age' => 24,
         ], [
+            'created_at' => '2020-06-26 13:33:58',
+            'updated_at' => '2020-06-26 13:33:58',
             'id' => 3,
             'username' => 'Professor',
             'pwd' => Hash::make('12345678'),
@@ -29,6 +33,8 @@ class TestSeeder extends Seeder
             'age' => 24,
         ]]);
         DB::table('users')->insert([
+            'created_at' => '2020-06-26 13:33:58',
+            'updated_at' => '2020-06-26 13:33:58',
             'id' => 2,
             'username' => '测试医生',
             'pwd' => Hash::make('12345678'),
@@ -50,6 +56,8 @@ class TestSeeder extends Seeder
 
         DB::table('addresses')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 1,
                 'user_id' => 2,
                 'real_name' => '某医生',
@@ -67,6 +75,8 @@ class TestSeeder extends Seeder
 
         DB::table('clinics')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 1,
                 'name' => '达明口腔门诊部',
                 'city' => '广州',
@@ -79,6 +89,8 @@ class TestSeeder extends Seeder
 
         DB::table('patients')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 'DLE200617083554',
                 'user_id' => 2,
                 'name' => '某人',
@@ -90,6 +102,8 @@ class TestSeeder extends Seeder
 
         DB::table('patient_cases')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 1,
                 'patient_id' => 'DLE200617083554',
                 'user_id' => 2,
@@ -102,6 +116,8 @@ class TestSeeder extends Seeder
 
         DB::table('orders')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 1,
                 'clinic_id' => 1,
                 'professor_id' => 1,
@@ -126,6 +142,8 @@ class TestSeeder extends Seeder
 
         DB::table('order_detail')->insert([
             [
+                'created_at' => '2020-06-26 13:33:58',
+                'updated_at' => '2020-06-26 13:33:58',
                 'id' => 1,
                 'order_id' => 1,
                 'product_no' => 'XXSD02',

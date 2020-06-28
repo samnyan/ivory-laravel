@@ -24,6 +24,8 @@ class CreatePatientsTable extends Migration
             $table->tinyInteger('sex')->nullable(false)->comment('0男1女2其他');
             $table->string('comments', 50)->nullable(false)
                 ->comment('备注信息');
+            $table->string('photo_url')->nullable(true)
+                ->comment('照片文件路径');
         });
     }
 
