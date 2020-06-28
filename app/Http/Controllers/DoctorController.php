@@ -243,6 +243,47 @@ class DoctorController extends Controller
     }
 
     /**
+     * Update patient
+     * Update patient detail
+     * @authenticated
+     * @bodyParam name string required The name of the patient. Example: someone
+     * @bodyParam age integer required The age of the patient. Example: 24
+     * @bodyParam sex integer required The sex of the patient. Example: [0, 1, 2]
+     * @bodyParam comments string required The comments of the patient. Example: Some content.
+     * @response {
+     * "id": "0",
+     * "name": "某人",
+     * "age": 10,
+     * "sex": 0,
+     * "comments": "0",
+     * "updated_at": "2020-06-26T13:43:15.000000Z",
+     * "created_at": "2020-06-26T13:43:15.000000Z"
+     * }
+     * @param Request $request
+     * @return Patient
+     * @throws \Throwable
+     */
+    public function updatePatient(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'sex' => 'required|between:0,2',
+            'comments' => 'required'
+        ]);
+
+        $patient = Patient::whereUserId(auth()->id())->whereId($id)->firstOrFail();
+
+        $patient->name = request()->get('name');
+        $patient->age = request()->get('age');
+        $patient->sex = request()->get('sex');
+        $patient->comments = request()->get('comments');
+        $patient->saveOrFail();
+
+        return $patient;
+    }
+
+    /**
      * Get patient cases
      * Get all patient cases created by this user.
      * @authenticated
