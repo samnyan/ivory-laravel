@@ -294,12 +294,14 @@ class DoctorController extends Controller
      * }
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
      */
     public function uploadPatientPhoto(Request $request, $id)
     {
         $patient = Patient::whereUserId(auth()->id())->whereId($id)->firstOrFail();
         $path = $request->file('photo')->store('patientPhoto');
         $patient->photo_url = $path;
+        $patient->saveOrFail();
         return response()->json(['message' => '照片更新成功', 'path' => $path]);
     }
 
@@ -536,6 +538,7 @@ class DoctorController extends Controller
 
         return response()->json(['message' => '删除成功']);
     }
+
     /**
      * Upload case files
      * Form request for upload a any files relate to a patient case (Such as images)
