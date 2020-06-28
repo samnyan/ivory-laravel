@@ -8,6 +8,8 @@ class Patient extends Model
 {
     protected $table = 'patients';
 
+    public $incrementing = false;
+
     protected $primaryKey = 'id';
     protected $keyType = 'string';
 
