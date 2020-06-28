@@ -2,7 +2,7 @@
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "00935780-a0bc-488a-9255-3fe4979622fe",
+        "_postman_id": "65acb93b-8325-4829-a6d4-d545fd37e82b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -192,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "molestiae",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -236,7 +236,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"certificate\": \"ullam\"\n}"
+                            "raw": "{\n    \"certificate\": \"fugit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -284,7 +284,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"corporis\"\n}"
+                            "raw": "{\n    \"name\": \"\\u8bca\\u6240\",\n    \"city\": \"\\u5e7f\\u5dde\",\n    \"position\": \"23.544983,113.595114\",\n    \"address\": \"\\u5e7f\\u5dde\\u5e02\\u4ece\\u5316\\u533a\\u6cb3\\u4e1c\\u5317\\u8def5\\u53f7\",\n    \"intro\": \"ipsa\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -308,7 +308,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"image\": \"laborum\"\n}"
+                            "raw": "{\n    \"image\": \"accusantium\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -396,6 +396,54 @@
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"name\": \"someone\",\n    \"age\": 24,\n    \"sex\": 0,\n    \"comments\": \"Some content.\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update patient\nUpdate patient detail",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patient\/:id",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"someone\",\n    \"age\": 24,\n    \"sex\": 0,\n    \"comments\": \"Some content.\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Upload patient photo\nForm request for upload patient photo, this will also update photo_url filed",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patient\/:id\/photo",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"file\": \"illum\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -527,6 +575,38 @@
                     }
                 },
                 {
+                    "name": "Delete patient case\nDelete patient case by id",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/doctor\/patientCase\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the case."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
                     "name": "Upload case files\nForm request for upload a any files relate to a patient case (Such as images)",
                     "request": {
                         "url": {
@@ -544,7 +624,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"file\": \"et\"\n}"
+                            "raw": "{\n    \"file\": \"impedit\"\n}"
                         },
                         "description": "",
                         "response": []
@@ -817,7 +897,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consequatur",
+                                    "value": "sit",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -873,7 +953,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eveniet",
+                                    "value": "beatae",
                                     "description": "The ID of the clinic"
                                 }
                             ]
@@ -929,7 +1009,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aliquid",
+                                    "value": "ut",
                                     "description": "The ID of the order"
                                 }
                             ]

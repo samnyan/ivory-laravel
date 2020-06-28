@@ -384,7 +384,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/open/clinic/qui"
+    "http://localhost/api/open/clinic/molestiae"
 );
 
 fetch(url, {
@@ -453,7 +453,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "ullam"
+    "certificate": "fugit"
 }
 
 fetch(url, {
@@ -537,7 +537,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "corporis"
+    "intro": "ipsa"
 }
 
 fetch(url, {
@@ -610,7 +610,7 @@ let headers = {
 };
 
 let body = {
-    "image": "laborum"
+    "image": "accusantium"
 }
 
 fetch(url, {
@@ -861,6 +861,144 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_23bc824a9562eb9873b6ae7e5d042322 -->
+<!-- START_ea7df65a25936229cd65eaf106b1880a -->
+<h2>Update patient</h2>
+<p>Update patient detail</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/doctor/patient/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "someone",
+    "age": 24,
+    "sex": 0,
+    "comments": "Some content."
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": "0",
+    "name": "某人",
+    "age": 10,
+    "sex": 0,
+    "comments": "0",
+    "updated_at": "2020-06-26T13:43:15.000000Z",
+    "created_at": "2020-06-26T13:43:15.000000Z"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/doctor/patient/{id}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>required</td>
+<td>The name of the patient.</td>
+</tr>
+<tr>
+<td><code>age</code></td>
+<td>integer</td>
+<td>required</td>
+<td>The age of the patient.</td>
+</tr>
+<tr>
+<td><code>sex</code></td>
+<td>integer</td>
+<td>required</td>
+<td>The sex of the patient.</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td>string</td>
+<td>required</td>
+<td>The comments of the patient.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_ea7df65a25936229cd65eaf106b1880a -->
+<!-- START_4c783098a1bf9946dc4fae0de17da216 -->
+<h2>Upload patient photo</h2>
+<p>Form request for upload patient photo, this will also update photo_url filed</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/doctor/patient/1/photo"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "illum"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "照片更新成功",
+    "path": "patientPhoto\/DRUCjs92FfgYEXY0DFTa5OUSrivUADxqB4sxPopS.jpeg"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/doctor/patient/{id}/photo</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>binary</td>
+<td>required</td>
+<td>The file of patient photo.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4c783098a1bf9946dc4fae0de17da216 -->
 <!-- START_555c845d7e367546dd34081c14d0a491 -->
 <h2>Get patient cases</h2>
 <p>Get all patient cases created by this user.</p>
@@ -1215,6 +1353,42 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_39dff5567a0a54c0d2d2d735d9b83847 -->
+<!-- START_e0f7f79784fedb525094a32ecff6817c -->
+<h2>Delete patient case</h2>
+<p>Delete patient case by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/doctor/patientCase/1"
+);
+
+fetch(url, {
+    method: "DELETE",
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/doctor/patientCase/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The ID of the case.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_e0f7f79784fedb525094a32ecff6817c -->
 <!-- START_bbffe0ca99bebb1c23df51b5e83746bc -->
 <h2>Upload case files</h2>
 <p>Form request for upload a any files relate to a patient case (Such as images)</p>
@@ -1232,7 +1406,7 @@ let headers = {
 };
 
 let body = {
-    "file": "et"
+    "file": "impedit"
 }
 
 fetch(url, {
@@ -1266,7 +1440,7 @@ fetch(url, {
 <td><code>file</code></td>
 <td>binary</td>
 <td>required</td>
-<td>The file of certificate image.</td>
+<td>The file of patient case image.</td>
 </tr>
 </tbody>
 </table>
@@ -1895,7 +2069,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/user/consequatur"
+    "http://localhost/api/management/user/sit"
 );
 
 fetch(url, {
@@ -1948,7 +2122,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/clinic/eveniet"
+    "http://localhost/api/management/clinic/beatae"
 );
 
 fetch(url, {
@@ -2001,7 +2175,7 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/management/order/aliquid"
+    "http://localhost/api/management/order/ut"
 );
 
 fetch(url, {

@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/qui"
+    "http://localhost/api/open/clinic/molestiae"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "ullam"
+    "certificate": "fugit"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "corporis"
+    "intro": "ipsa"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "laborum"
+    "image": "accusantium"
 }
 
 fetch(url, {
@@ -764,6 +764,117 @@ Parameter | Type | Status | Description
         `comments` | string |  required  | The comments of the patient.
     
 <!-- END_23bc824a9562eb9873b6ae7e5d042322 -->
+
+<!-- START_ea7df65a25936229cd65eaf106b1880a -->
+## Update patient
+Update patient detail
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patient/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "someone",
+    "age": 24,
+    "sex": 0,
+    "comments": "Some content."
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "id": "0",
+    "name": "某人",
+    "age": 10,
+    "sex": 0,
+    "comments": "0",
+    "updated_at": "2020-06-26T13:43:15.000000Z",
+    "created_at": "2020-06-26T13:43:15.000000Z"
+}
+```
+
+### HTTP Request
+`POST api/doctor/patient/{id}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | The name of the patient.
+        `age` | integer |  required  | The age of the patient.
+        `sex` | integer |  required  | The sex of the patient.
+        `comments` | string |  required  | The comments of the patient.
+    
+<!-- END_ea7df65a25936229cd65eaf106b1880a -->
+
+<!-- START_4c783098a1bf9946dc4fae0de17da216 -->
+## Upload patient photo
+Form request for upload patient photo, this will also update photo_url filed
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patient/1/photo"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "illum"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+> Example response (200):
+
+```json
+{
+    "message": "照片更新成功",
+    "path": "patientPhoto\/DRUCjs92FfgYEXY0DFTa5OUSrivUADxqB4sxPopS.jpeg"
+}
+```
+
+### HTTP Request
+`POST api/doctor/patient/{id}/photo`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `file` | binary |  required  | The file of patient photo.
+    
+<!-- END_4c783098a1bf9946dc4fae0de17da216 -->
 
 <!-- START_555c845d7e367546dd34081c14d0a491 -->
 ## Get patient cases
@@ -1072,6 +1183,39 @@ Parameter | Type | Status | Description
     
 <!-- END_39dff5567a0a54c0d2d2d735d9b83847 -->
 
+<!-- START_e0f7f79784fedb525094a32ecff6817c -->
+## Delete patient case
+Delete patient case by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```javascript
+const url = new URL(
+    "http://localhost/api/doctor/patientCase/1"
+);
+
+
+fetch(url, {
+    method: "DELETE",
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE api/doctor/patientCase/{id}`
+
+#### URL Parameters
+
+Parameter | Status | Description
+--------- | ------- | ------- | -------
+    `id` |  required  | The ID of the case.
+
+<!-- END_e0f7f79784fedb525094a32ecff6817c -->
+
 <!-- START_bbffe0ca99bebb1c23df51b5e83746bc -->
 ## Upload case files
 Form request for upload a any files relate to a patient case (Such as images)
@@ -1090,7 +1234,7 @@ let headers = {
 };
 
 let body = {
-    "file": "et"
+    "file": "impedit"
 }
 
 fetch(url, {
@@ -1118,7 +1262,7 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `file` | binary |  required  | The file of certificate image.
+    `file` | binary |  required  | The file of patient case image.
     
 <!-- END_bbffe0ca99bebb1c23df51b5e83746bc -->
 
@@ -1620,7 +1764,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/consequatur"
+    "http://localhost/api/management/user/sit"
 );
 
 
@@ -1679,7 +1823,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/eveniet"
+    "http://localhost/api/management/clinic/beatae"
 );
 
 
@@ -1738,7 +1882,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/aliquid"
+    "http://localhost/api/management/order/ut"
 );
 
 
