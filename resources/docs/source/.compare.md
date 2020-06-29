@@ -345,7 +345,7 @@ Get clinic by id
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/open/clinic/molestiae"
+    "http://localhost/api/open/clinic/quas"
 );
 
 
@@ -413,7 +413,7 @@ let headers = {
 };
 
 let body = {
-    "certificate": "fugit"
+    "certificate": "voluptas"
 }
 
 fetch(url, {
@@ -500,7 +500,7 @@ let body = {
     "city": "\u5e7f\u5dde",
     "position": "23.544983,113.595114",
     "address": "\u5e7f\u5dde\u5e02\u4ece\u5316\u533a\u6cb3\u4e1c\u5317\u8def5\u53f7",
-    "intro": "ipsa"
+    "intro": "doloribus"
 }
 
 fetch(url, {
@@ -546,7 +546,7 @@ let headers = {
 };
 
 let body = {
-    "image": "accusantium"
+    "image": "et"
 }
 
 fetch(url, {
@@ -613,12 +613,26 @@ fetch(url, {
     "data": [
         {
             "id": "DLE200617083554",
-            "created_at": null,
-            "updated_at": null,
+            "created_at": "2020-06-26T13:33:58.000000Z",
+            "updated_at": "2020-06-26T13:33:58.000000Z",
             "name": "某人",
             "age": 10,
             "sex": 0,
-            "comments": "无"
+            "comments": "无",
+            "photo_url": null,
+            "patient_cases": [
+                {
+                    "id": 1,
+                    "created_at": "2020-06-26T13:33:58.000000Z",
+                    "updated_at": "2020-06-26T13:33:58.000000Z",
+                    "patient_id": "DLE200617083554",
+                    "user_id": 2,
+                    "state": 2,
+                    "features": "无症状",
+                    "files": "{}",
+                    "therapy_program": "无需治疗"
+                }
+            ]
         }
     ],
     "first_page_url": "http:\/\/localhost:8000\/api\/doctor\/patient?page=1",
@@ -844,7 +858,7 @@ let headers = {
 };
 
 let body = {
-    "file": "illum"
+    "file": "aut"
 }
 
 fetch(url, {
@@ -1234,7 +1248,7 @@ let headers = {
 };
 
 let body = {
-    "file": "impedit"
+    "file": "in"
 }
 
 fetch(url, {
@@ -1764,7 +1778,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/user/sit"
+    "http://localhost/api/management/user/aut"
 );
 
 
@@ -1823,7 +1837,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/clinic/beatae"
+    "http://localhost/api/management/clinic/quos"
 );
 
 
@@ -1882,7 +1896,7 @@ fetch(url, {
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/management/order/ut"
+    "http://localhost/api/management/order/fugit"
 );
 
 

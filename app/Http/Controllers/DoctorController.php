@@ -138,12 +138,26 @@ class DoctorController extends Controller
      * "data": [
      * {
      * "id": "DLE200617083554",
-     * "created_at": null,
-     * "updated_at": null,
+     * "created_at": "2020-06-26T13:33:58.000000Z",
+     * "updated_at": "2020-06-26T13:33:58.000000Z",
      * "name": "某人",
      * "age": 10,
      * "sex": 0,
-     * "comments": "无"
+     * "comments": "无",
+     * "photo_url": null,
+     * "patient_cases": [
+     * {
+     * "id": 1,
+     * "created_at": "2020-06-26T13:33:58.000000Z",
+     * "updated_at": "2020-06-26T13:33:58.000000Z",
+     * "patient_id": "DLE200617083554",
+     * "user_id": 2,
+     * "state": 2,
+     * "features": "无症状",
+     * "files": "{}",
+     * "therapy_program": "无需治疗"
+     * }
+     * ]
      * }
      * ],
      * "first_page_url": "http://localhost:8000/api/doctor/patient?page=1",
@@ -161,7 +175,7 @@ class DoctorController extends Controller
      */
     public function getPatients()
     {
-        return Patient::whereUserId(auth()->id())->paginate(15);
+        return Patient::whereUserId(auth()->id())->with('patientCases')->paginate(15);
     }
 
     /**
