@@ -2,6 +2,11 @@
 
 Ivory-Laravel is an api backend for Ivory-Vue.
 
+### Front end
+https://github.com/ZYKJShadow/ivory-admin
+
+https://github.com/samnyan/ivory-vue
+
 ### Install dependencies
 ```
 composer install
@@ -15,7 +20,7 @@ Copy `.env.example` to `.env`, and change the database settings.
 Run `php artisan migrate` to start database migration.
 
 ### Star a develop server
-Before running for the first time, run `php artisan key:generate` to generate the application key.
+Before running for the first time, run `php artisan key:generate` and `php artisan jwt:secret` to generate the application key.
 ```
 php artisan serve
 ```
